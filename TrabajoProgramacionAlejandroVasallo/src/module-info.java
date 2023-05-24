@@ -6,4 +6,5 @@
  *
  */
 module TrabajoProgramacionAlejandroVasallo {
+	requires java.sql;
 }
