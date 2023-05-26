@@ -1,13 +1,21 @@
 package mW2Wiki;
 
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 public class Camuflaje {
 
-	private int idCamuflaje;
+    private int idCamuflaje;
     private String nombre;
     private String requisitoDesbloqueo;
-    private Arma[] armas;
+    private ArrayList<Arma> armas;
 
-    public Camuflaje(int idCamuflaje, String nombre, String requisitoDesbloqueo, Arma[] armas) {
+    public Camuflaje(int idCamuflaje, String nombre, String requisitoDesbloqueo, ArrayList<Arma> armas) {
         this.idCamuflaje = idCamuflaje;
         this.nombre = nombre;
         this.requisitoDesbloqueo = requisitoDesbloqueo;
@@ -18,6 +26,37 @@ public class Camuflaje {
         this.idCamuflaje = idCamuflaje;
         this.nombre = nombre;
         this.requisitoDesbloqueo = requisitoDesbloqueo;
+    }
+    
+    public static List<Camuflaje> obtenerCamuflajes() {
+        List<Camuflaje> camuflajes = new ArrayList<>();
+
+        String usu = "root";
+        String pas = "alejandro2002";
+        String puerto = "3307";
+        String maquina = "localhost";
+        String baseDatos = "mw2wiki";
+        String url = "jdbc:mysql://" + maquina + ":" + puerto + "/" + baseDatos;
+
+        try (Connection connection = DriverManager.getConnection(url, usu, pas);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM Camuflaje")) {
+
+            while (resultSet.next()) {
+                int idCamuflaje = resultSet.getInt("id_Camuflaje");
+                int idArma = resultSet.getInt("id_Arma");
+                String nombre = resultSet.getString("nombre");
+                String requisitoDesbloqueo = resultSet.getString("requisito_Desbloqueo");
+
+                Camuflaje camuflaje = new Camuflaje(idCamuflaje, idArma, nombre, requisitoDesbloqueo);
+                camuflajes.add(camuflaje);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Manejo de excepciones en caso de error de conexión o consulta
+        }
+
+        return camuflajes;
     }
 
     public int getIdCamuflaje() {
@@ -44,13 +83,11 @@ public class Camuflaje {
         this.requisitoDesbloqueo = requisitoDesbloqueo;
     }
 
-    public Arma[] getArmas() {
+    public ArrayList<Arma> getArmas() {
         return armas;
     }
 
-    public void setArmas(Arma[] armas) {
+    public void setArmas(ArrayList<Arma> armas) {
         this.armas = armas;
     }
-	
-	
 }

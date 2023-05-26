@@ -1,26 +1,32 @@
 package mW2Wiki;
 
+import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 public class Arma {
+    private int id_Arma;
+    private String nombre;
+    private String descripcion;
+    private String requisito_Desbloqueo;
+    private int daño;
+    private int precision;
+    private int retroceso;
+    private int manejo;
+    private int movilidad;
+    private int cadencia;
+    private int alcance;
+    private ArrayList<Accesorio> accesorios;
+    private ArrayList<Camuflaje> camuflajes;
 
-	private int id_Arma;
-	private String nombre;
-	private String descripcion;
-	private String requisito_Desbloqueo;
-	private int daño;
-	private int precision;
-	private int retroceso;
-	private int manejo;
-	private int movilidad;
-	private int cadencia;
-	private int alcance;
-	private Accesorio [] accesorios;
-	private Camuflaje [] camuflajes;
-	
-	
-	// Constructor principal
+    // Constructor principal
     public Arma(int id_Arma, String nombre, String descripcion, String requisito_Desbloqueo,
                 int daño, int precision, int retroceso, int manejo, int movilidad,
-                int cadencia, int alcance, Accesorio[] accesorios, Camuflaje[] camuflajes) {
+                int cadencia, int alcance, ArrayList<Accesorio> accesorios, ArrayList<Camuflaje> camuflajes) {
         this.id_Arma = id_Arma;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -35,7 +41,96 @@ public class Arma {
         this.accesorios = accesorios;
         this.camuflajes = camuflajes;
     }
+    public Arma(int idArma, String nombre, String descripcion, String requisitoDesbloqueo,
+            int daño, float precision, float retroceso, float manejo, float movilidad,
+            float cadencia, float alcance, ArrayList<Accesorio> accesorios, ArrayList<Camuflaje> camuflajes) {
+    this.id_Arma = idArma;
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.requisito_Desbloqueo = requisitoDesbloqueo;
+    this.daño = daño;
+    this.precision = (int) precision;
+    this.retroceso = (int) retroceso;
+    this.manejo = (int) manejo;
+    this.movilidad = (int) movilidad;
+    this.cadencia = (int) cadencia;
+    this.alcance = (int) alcance;
+    this.accesorios = accesorios;
+    this.camuflajes = camuflajes;
+}
 
+public static List<Arma> obtenerArmas() {
+    List<Arma> armas = new ArrayList<>();
+
+    String usu = "root";
+    String pas = "alejandro2002";
+    String puerto = "3307";
+    String maquina = "localhost";
+    String baseDatos = "mw2wiki";
+    String url = "jdbc:mysql://" + maquina + ":" + puerto + "/" + baseDatos;
+
+    try (Connection connection = DriverManager.getConnection(url, usu, pas);
+         Statement statement = connection.createStatement();
+         ResultSet resultSet = statement.executeQuery("SELECT * FROM Arma")) {
+
+        while (resultSet.next()) {
+            int idArma = resultSet.getInt("id_Arma");
+            String nombre = resultSet.getString("nombre");
+            String descripcion = resultSet.getString("descripcion");
+            String requisitoDesbloqueo = resultSet.getString("requisito_Desbloqueo");
+            int daño = resultSet.getInt("daño");
+            float precision = resultSet.getFloat("precision");
+            float retroceso = resultSet.getFloat("retroceso");
+            float manejo = resultSet.getFloat("manejo");
+            float movilidad = resultSet.getFloat("movilidad");
+            float cadencia = resultSet.getFloat("cadencia");
+            float alcance = resultSet.getFloat("alcance");
+
+            // Obtener accesorios y camuflajes de la base de datos
+            ArrayList<Accesorio> accesorios = obtenerAccesorios(idArma);
+            ArrayList<Camuflaje> camuflajes = obtenerCamuflajes(idArma);
+
+            Arma arma = new Arma(idArma, nombre, descripcion, requisitoDesbloqueo, daño,
+                    precision, retroceso, manejo, movilidad, cadencia, alcance, accesorios, camuflajes);
+            armas.add(arma);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Manejo de excepciones en caso de error de conexión o consulta
+    }
+
+    return armas;
+}
+
+private static ArrayList<Accesorio> obtenerAccesorios(int idArma) {
+    ArrayList<Accesorio> accesorios = new ArrayList<>();
+
+    // Lógica para obtener los accesorios de la base de datos para el arma con el idArma proporcionado
+
+    // Ejemplo:
+    // Accesorio accesorio1 = obtenerAccesorio(idAccesorio1);
+    // Accesorio accesorio2 = obtenerAccesorio(idAccesorio2);
+    // accesorios.add(accesorio1);
+    // accesorios.add(accesorio2);
+
+    return accesorios;
+}
+
+private static ArrayList<Camuflaje> obtenerCamuflajes(int idArma) {
+    ArrayList<Camuflaje> camuflajes = new ArrayList<>();
+
+    // Lógica para obtener los camuflajes de la base de datos para el arma con el idArma proporcionado
+
+    // Ejemplo:
+    // Camuflaje camuflaje1 = obtenerCamuflaje(idCamuflaje1);
+    // Camuflaje camuflaje2 = obtenerCamuflaje(idCamuflaje2);
+    // camuflajes.add(camuflaje1);
+    // camuflajes.add(camuflaje2);
+
+    return camuflajes;
+}
+    
+    
 
     // Getters y setters
     public int getId_Arma() {
@@ -126,21 +221,38 @@ public class Arma {
         this.alcance = alcance;
     }
 
-    public Accesorio[] getAccesorios() {
+    public ArrayList<Accesorio> getAccesorios() {
         return accesorios;
     }
 
-    public void setAccesorios(Accesorio[] accesorios) {
+    public void setAccesorios(ArrayList<Accesorio> accesorios) {
         this.accesorios = accesorios;
     }
 
-    public Camuflaje[] getCamuflajes() {
+    public ArrayList<Camuflaje> getCamuflajes() {
         return camuflajes;
     }
 
-    public void setCamuflajes(Camuflaje[] camuflajes) {
+    public void setCamuflajes(ArrayList<Camuflaje> camuflajes) {
         this.camuflajes = camuflajes;
     }
-	
-	
+
+    @Override
+    public String toString() {
+        return "Arma{" +
+                "id_Arma=" + id_Arma +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", requisito_Desbloqueo='" + requisito_Desbloqueo + '\'' +
+                ", daño=" + daño +
+                ", precision=" + precision +
+                ", retroceso=" + retroceso +
+                ", manejo=" + manejo +
+                ", movilidad=" + movilidad +
+                ", cadencia=" + cadencia +
+                ", alcance=" + alcance +
+                ", accesorios=" + accesorios +
+                ", camuflajes=" + camuflajes +
+                '}';
+    }
 }
