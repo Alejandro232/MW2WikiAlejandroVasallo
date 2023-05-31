@@ -62,7 +62,74 @@ public class RequisitosPc {
         return requisitosPc;
     }
 
-    // Getters y setters
-    // ...
+	public int getIdRequisito() {
+		return idRequisito;
+	}
+
+	public void setIdRequisito(int idRequisito) {
+		this.idRequisito = idRequisito;
+	}
+
+	public String getSistemaOperativo() {
+		return sistemaOperativo;
+	}
+
+	public void setSistemaOperativo(String sistemaOperativo) {
+		this.sistemaOperativo = sistemaOperativo;
+	}
+
+	public String getMemoriaRam() {
+		return memoriaRam;
+	}
+
+	public void setMemoriaRam(String memoriaRam) {
+		this.memoriaRam = memoriaRam;
+	}
+
+	public String getProcesador() {
+		return procesador;
+	}
+
+	public void setProcesador(String procesador) {
+		this.procesador = procesador;
+	}
+
+	public String getTarjetaGrafica() {
+		return tarjetaGrafica;
+	}
+
+	public void setTarjetaGrafica(String tarjetaGrafica) {
+		this.tarjetaGrafica = tarjetaGrafica;
+	}
+
+	public String getMemoriaGrafica() {
+		return memoriaGrafica;
+	}
+
+	public void setMemoriaGrafica(String memoriaGrafica) {
+		this.memoriaGrafica = memoriaGrafica;
+	}
+
+	public String getAlmacenamiento() {
+		return almacenamiento;
+	}
+
+	public void setAlmacenamiento(String almacenamiento) {
+		this.almacenamiento = almacenamiento;
+	}
+
+	@Override
+	public String toString() {
+	    return "RequisitosPc{" +
+	            "idRequisito=" + idRequisito +
+	            ", sistemaOperativo='" + sistemaOperativo + '\'' +
+	            ", memoriaRam='" + memoriaRam + '\'' +
+	            ", procesador='" + procesador + '\'' +
+	            ", tarjetaGrafica='" + tarjetaGrafica + '\'' +
+	            ", memoriaGrafica='" + memoriaGrafica + '\'' +
+	            ", almacenamiento='" + almacenamiento + '\'' +
+	            '}';
+	}
+
 }
 

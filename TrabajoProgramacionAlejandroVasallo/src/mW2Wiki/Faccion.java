@@ -1,12 +1,10 @@
 package mW2Wiki;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Faccion {
@@ -14,18 +12,13 @@ public class Faccion {
     private int idFaccion;
     private String nombre;
     private String descripcion;
-    private float tamaño;
-    private String zona;
-    private ArrayList<Operador> operadores;
 
-    public Faccion(int idFaccion, String nombre, String descripcion, float tamaño, String zona, ArrayList<Operador> operadores) {
+    public Faccion(int idFaccion, String nombre, String descripcion) {
         this.idFaccion = idFaccion;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tamaño = tamaño;
-        this.zona = zona;
-        this.operadores = operadores;
     }
+    
     public static List<Faccion> obtenerFacciones() {
         List<Faccion> facciones = new ArrayList<>();
 
@@ -56,10 +49,6 @@ public class Faccion {
         return facciones;
     }
 
-    public Faccion(int idFaccion) {
-        this.idFaccion = idFaccion;
-    }
-
     public int getIdFaccion() {
         return idFaccion;
     }
@@ -84,39 +73,12 @@ public class Faccion {
         this.descripcion = descripcion;
     }
 
-    public float getTamaño() {
-        return tamaño;
-    }
-
-    public void setTamaño(float tamaño) {
-        this.tamaño = tamaño;
-    }
-
-    public String getZona() {
-        return zona;
-    }
-
-    public void setZona(String zona) {
-        this.zona = zona;
-    }
-
-    public ArrayList<Operador> getOperadores() {
-        return operadores;
-    }
-
-    public void setOperadores(ArrayList<Operador> operadores) {
-        this.operadores = operadores;
-    }
-
     @Override
     public String toString() {
         return "Faccion{" +
                 "idFaccion=" + idFaccion +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", tamaño=" + tamaño +
-                ", zona='" + zona + '\'' +
-                ", operadores=" + operadores +
                 '}';
     }
 }

@@ -1,8 +1,12 @@
 package mW2Wiki;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 public class Operador {
 
@@ -10,18 +14,14 @@ public class Operador {
     private String nombre;
     private String genero;
     private float altura;
-    private Aspecto[] aspectosDisponibles;
-    private Faccion faccion;
 
-    public Operador(int idOperador, String nombre, String genero, float altura, Aspecto[] aspectosDisponibles, Faccion faccion) {
+    public Operador(int idOperador, String nombre, String genero, float altura) {
         this.idOperador = idOperador;
         this.nombre = nombre;
         this.genero = genero;
         this.altura = altura;
-        this.aspectosDisponibles = aspectosDisponibles;
-        this.faccion = faccion;
     }
-    
+
     public static List<Operador> obtenerOperadores() {
         List<Operador> operadores = new ArrayList<>();
 
@@ -38,12 +38,11 @@ public class Operador {
 
             while (resultSet.next()) {
                 int idOperador = resultSet.getInt("id_Operador");
-                int idFaccion = resultSet.getInt("id_Faccion");
                 String nombre = resultSet.getString("nombre");
                 String genero = resultSet.getString("genero");
                 float altura = resultSet.getFloat("altura");
 
-                Operador operador = new Operador(idOperador, idFaccion, nombre, genero, altura);
+                Operador operador = new Operador(idOperador, nombre, genero, altura);
                 operadores.add(operador);
             }
         } catch (SQLException e) {
@@ -52,10 +51,6 @@ public class Operador {
         }
 
         return operadores;
-    }
-
-    public Operador(int idOperador) {
-        this.idOperador = idOperador;
     }
 
     public int getIdOperador() {
@@ -90,22 +85,6 @@ public class Operador {
         this.altura = altura;
     }
 
-    public Aspecto[] getAspectosDisponibles() {
-        return aspectosDisponibles;
-    }
-
-    public void setAspectosDisponibles(Aspecto[] aspectosDisponibles) {
-        this.aspectosDisponibles = aspectosDisponibles;
-    }
-
-    public Faccion getFaccion() {
-        return faccion;
-    }
-
-    public void setFaccion(Faccion faccion) {
-        this.faccion = faccion;
-    }
-
     @Override
     public String toString() {
         return "Operador{" +
@@ -113,8 +92,6 @@ public class Operador {
                 ", nombre='" + nombre + '\'' +
                 ", genero='" + genero + '\'' +
                 ", altura=" + altura +
-                ", aspectosDisponibles=" + Arrays.toString(aspectosDisponibles) +
-                ", faccion=" + faccion +
                 '}';
     }
 }

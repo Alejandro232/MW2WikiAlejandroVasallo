@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Aspecto {
@@ -22,7 +21,7 @@ public class Aspecto {
         this.requisitoDesbloqueo = requisitoDesbloqueo;
         this.operadores = operadores;
     }
-    
+
     public static List<Aspecto> obtenerAspectos() {
         List<Aspecto> aspectos = new ArrayList<>();
 
@@ -42,7 +41,7 @@ public class Aspecto {
                 String nombre = resultSet.getString("nombre");
                 String requisitoDesbloqueo = resultSet.getString("requisito_Desbloqueo");
 
-                Aspecto aspecto = new Aspecto(idAspecto, nombre, requisitoDesbloqueo);
+                Aspecto aspecto = new Aspecto(idAspecto, nombre, requisitoDesbloqueo, null);
                 aspectos.add(aspecto);
             }
         } catch (SQLException e) {

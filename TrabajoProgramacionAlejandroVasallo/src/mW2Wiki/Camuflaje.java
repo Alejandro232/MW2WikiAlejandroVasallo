@@ -1,6 +1,5 @@
 package mW2Wiki;
 
-import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,19 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 public class Camuflaje {
 
     private int idCamuflaje;
     private String nombre;
     private String requisitoDesbloqueo;
-    private ArrayList<Arma> armas;
-
-    public Camuflaje(int idCamuflaje, String nombre, String requisitoDesbloqueo, ArrayList<Arma> armas) {
-        this.idCamuflaje = idCamuflaje;
-        this.nombre = nombre;
-        this.requisitoDesbloqueo = requisitoDesbloqueo;
-        this.armas = armas;
-    }
 
     public Camuflaje(int idCamuflaje, String nombre, String requisitoDesbloqueo) {
         this.idCamuflaje = idCamuflaje;
@@ -44,11 +36,10 @@ public class Camuflaje {
 
             while (resultSet.next()) {
                 int idCamuflaje = resultSet.getInt("id_Camuflaje");
-                int idArma = resultSet.getInt("id_Arma");
                 String nombre = resultSet.getString("nombre");
                 String requisitoDesbloqueo = resultSet.getString("requisito_Desbloqueo");
 
-                Camuflaje camuflaje = new Camuflaje(idCamuflaje, idArma, nombre, requisitoDesbloqueo);
+                Camuflaje camuflaje = new Camuflaje(idCamuflaje, nombre, requisitoDesbloqueo);
                 camuflajes.add(camuflaje);
             }
         } catch (SQLException e) {
@@ -81,13 +72,5 @@ public class Camuflaje {
 
     public void setRequisitoDesbloqueo(String requisitoDesbloqueo) {
         this.requisitoDesbloqueo = requisitoDesbloqueo;
-    }
-
-    public ArrayList<Arma> getArmas() {
-        return armas;
-    }
-
-    public void setArmas(ArrayList<Arma> armas) {
-        this.armas = armas;
     }
 }
