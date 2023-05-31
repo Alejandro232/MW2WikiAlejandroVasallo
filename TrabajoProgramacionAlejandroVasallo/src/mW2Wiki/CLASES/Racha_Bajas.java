@@ -1,4 +1,5 @@
-package mW2Wiki;
+package mW2Wiki.CLASES;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -6,20 +7,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-public class ClaseArma {
-    private int id_Clase_Arma;
+
+public class Racha_Bajas {
+
+	private int idRachaBajas;
     private String nombre;
     private String descripcion;
+    private int puntosNecesarios;
 
-    // Constructor principal
-    public ClaseArma(int id_Clase_Arma, String nombre, String descripcion) {
-        this.id_Clase_Arma = id_Clase_Arma;
+    public Racha_Bajas(int idRachaBajas, String nombre, String descripcion, int puntosNecesarios) {
+        this.idRachaBajas = idRachaBajas;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.puntosNecesarios = puntosNecesarios;
     }
     
-    public static List<ClaseArma> obtenerClasesArma() {
-        List<ClaseArma> clasesArma = new ArrayList<>();
+    public static List<Racha_Bajas> obtenerRachasBajas() {
+        List<Racha_Bajas> rachasBajas = new ArrayList<>();
 
         String usu = "root";
         String pas = "alejandro2002";
@@ -30,31 +34,35 @@ public class ClaseArma {
 
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM Clase_Arma")) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM Rachas_Bajas")) {
 
             while (resultSet.next()) {
-                int idClaseArma = resultSet.getInt("id_Clase_Arma");
+                int idRachaBaja = resultSet.getInt("id_Racha_Baja");
                 String nombre = resultSet.getString("nombre");
                 String descripcion = resultSet.getString("descripcion");
+                int puntosNecesarios = resultSet.getInt("puntos_Necesarios");
 
-                ClaseArma claseArma = new ClaseArma(idClaseArma, nombre, descripcion);
-                clasesArma.add(claseArma);
+                Racha_Bajas rachaBaja = new Racha_Bajas(idRachaBaja, nombre, descripcion, puntosNecesarios);
+                rachasBajas.add(rachaBaja);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Manejo de excepciones en caso de error de conexión o consulta
         }
 
-        return clasesArma;
+        return rachasBajas;
     }
 
-    // Getters y setters
-    public int getId_Clase_Arma() {
-        return id_Clase_Arma;
+    public Racha_Bajas(int idRachaBajas) {
+        this.idRachaBajas = idRachaBajas;
     }
 
-    public void setId_Clase_Arma(int id_Clase_Arma) {
-        this.id_Clase_Arma = id_Clase_Arma;
+    public int getIdRachaBajas() {
+        return idRachaBajas;
+    }
+
+    public void setIdRachaBajas(int idRachaBajas) {
+        this.idRachaBajas = idRachaBajas;
     }
 
     public String getNombre() {
@@ -73,13 +81,22 @@ public class ClaseArma {
         this.descripcion = descripcion;
     }
 
+    public int getPuntosNecesarios() {
+        return puntosNecesarios;
+    }
+
+    public void setPuntosNecesarios(int puntosNecesarios) {
+        this.puntosNecesarios = puntosNecesarios;
+    }
+
     @Override
     public String toString() {
-        return "ClaseArma{" +
-                "id_Clase_Arma=" + id_Clase_Arma +
+        return "RachaBajas{" +
+                "idRachaBajas=" + idRachaBajas +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                ", puntosNecesarios=" + puntosNecesarios +
                 '}';
     }
+	
 }
-

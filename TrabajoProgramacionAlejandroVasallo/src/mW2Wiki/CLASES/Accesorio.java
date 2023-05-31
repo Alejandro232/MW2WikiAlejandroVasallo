@@ -1,4 +1,5 @@
-package mW2Wiki;
+package mW2Wiki.CLASES;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,20 +8,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Faccion {
-
-    private int idFaccion;
+public class Accesorio {
+    private int id_Accesorio;
     private String nombre;
     private String descripcion;
 
-    public Faccion(int idFaccion, String nombre, String descripcion) {
-        this.idFaccion = idFaccion;
+    public Accesorio(int id_Accesorio, String nombre, String descripcion) {
+        this.id_Accesorio = id_Accesorio;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-    
-    public static List<Faccion> obtenerFacciones() {
-        List<Faccion> facciones = new ArrayList<>();
+
+    public static List<Accesorio> obtenerAccesorios() {
+        List<Accesorio> accesorios = new ArrayList<>();
 
         String usu = "root";
         String pas = "alejandro2002";
@@ -31,30 +31,30 @@ public class Faccion {
 
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM Faccion")) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM Accesorio")) {
 
             while (resultSet.next()) {
-                int idFaccion = resultSet.getInt("id_Faccion");
+                int idAccesorio = resultSet.getInt("id_Accesorio");
                 String nombre = resultSet.getString("nombre");
                 String descripcion = resultSet.getString("descripcion");
 
-                Faccion faccion = new Faccion(idFaccion, nombre, descripcion);
-                facciones.add(faccion);
+                Accesorio accesorio = new Accesorio(idAccesorio, nombre, descripcion);
+                accesorios.add(accesorio);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Manejo de excepciones en caso de error de conexión o consulta
         }
 
-        return facciones;
+        return accesorios;
     }
 
-    public int getIdFaccion() {
-        return idFaccion;
+    public int getId_Accesorio() {
+        return id_Accesorio;
     }
 
-    public void setIdFaccion(int idFaccion) {
-        this.idFaccion = idFaccion;
+    public void setId_Accesorio(int id_Accesorio) {
+        this.id_Accesorio = id_Accesorio;
     }
 
     public String getNombre() {
@@ -75,8 +75,8 @@ public class Faccion {
 
     @Override
     public String toString() {
-        return "Faccion{" +
-                "idFaccion=" + idFaccion +
+        return "Accesorio{" +
+                "id_Accesorio=" + id_Accesorio +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';

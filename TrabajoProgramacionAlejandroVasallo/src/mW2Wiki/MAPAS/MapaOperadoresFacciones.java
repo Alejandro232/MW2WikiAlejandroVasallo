@@ -1,4 +1,4 @@
-package mW2Wiki;
+package mW2Wiki.MAPAS;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.sql.Connection;
@@ -9,9 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import mW2Wiki.CLASES.Faccion;
+import mW2Wiki.CLASES.Operador;
 public class MapaOperadoresFacciones {
 
-	MapaOperadoresFacciones(){
+	public MapaOperadoresFacciones(){
 		
 	}
 	

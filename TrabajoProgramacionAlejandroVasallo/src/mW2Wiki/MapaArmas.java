@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mW2Wiki.CLASES.Arma;
+import mW2Wiki.CLASES.ClaseArma;
+
 public class MapaArmas {
 
 	

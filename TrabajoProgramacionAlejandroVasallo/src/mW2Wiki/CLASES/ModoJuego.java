@@ -1,4 +1,4 @@
-package mW2Wiki;
+package mW2Wiki.CLASES;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

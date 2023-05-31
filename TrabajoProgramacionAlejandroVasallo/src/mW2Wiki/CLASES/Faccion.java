@@ -1,5 +1,4 @@
-package mW2Wiki;
-
+package mW2Wiki.CLASES;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,22 +7,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Racha_Bajas {
+public class Faccion {
 
-	private int idRachaBajas;
+    private int idFaccion;
     private String nombre;
     private String descripcion;
-    private int puntosNecesarios;
 
-    public Racha_Bajas(int idRachaBajas, String nombre, String descripcion, int puntosNecesarios) {
-        this.idRachaBajas = idRachaBajas;
+    public Faccion(int idFaccion, String nombre, String descripcion) {
+        this.idFaccion = idFaccion;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.puntosNecesarios = puntosNecesarios;
     }
     
-    public static List<Racha_Bajas> obtenerRachasBajas() {
-        List<Racha_Bajas> rachasBajas = new ArrayList<>();
+    public static List<Faccion> obtenerFacciones() {
+        List<Faccion> facciones = new ArrayList<>();
 
         String usu = "root";
         String pas = "alejandro2002";
@@ -34,35 +31,30 @@ public class Racha_Bajas {
 
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM Rachas_Bajas")) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM Faccion")) {
 
             while (resultSet.next()) {
-                int idRachaBaja = resultSet.getInt("id_Racha_Baja");
+                int idFaccion = resultSet.getInt("id_Faccion");
                 String nombre = resultSet.getString("nombre");
                 String descripcion = resultSet.getString("descripcion");
-                int puntosNecesarios = resultSet.getInt("puntos_Necesarios");
 
-                Racha_Bajas rachaBaja = new Racha_Bajas(idRachaBaja, nombre, descripcion, puntosNecesarios);
-                rachasBajas.add(rachaBaja);
+                Faccion faccion = new Faccion(idFaccion, nombre, descripcion);
+                facciones.add(faccion);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Manejo de excepciones en caso de error de conexión o consulta
         }
 
-        return rachasBajas;
+        return facciones;
     }
 
-    public Racha_Bajas(int idRachaBajas) {
-        this.idRachaBajas = idRachaBajas;
+    public int getIdFaccion() {
+        return idFaccion;
     }
 
-    public int getIdRachaBajas() {
-        return idRachaBajas;
-    }
-
-    public void setIdRachaBajas(int idRachaBajas) {
-        this.idRachaBajas = idRachaBajas;
+    public void setIdFaccion(int idFaccion) {
+        this.idFaccion = idFaccion;
     }
 
     public String getNombre() {
@@ -81,22 +73,12 @@ public class Racha_Bajas {
         this.descripcion = descripcion;
     }
 
-    public int getPuntosNecesarios() {
-        return puntosNecesarios;
-    }
-
-    public void setPuntosNecesarios(int puntosNecesarios) {
-        this.puntosNecesarios = puntosNecesarios;
-    }
-
     @Override
     public String toString() {
-        return "RachaBajas{" +
-                "idRachaBajas=" + idRachaBajas +
+        return "Faccion{" +
+                "idFaccion=" + idFaccion +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", puntosNecesarios=" + puntosNecesarios +
                 '}';
     }
-	
 }
