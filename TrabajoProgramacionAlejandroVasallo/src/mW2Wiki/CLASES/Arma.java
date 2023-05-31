@@ -42,7 +42,12 @@ public class Arma {
         this.camuflajes = camuflajes;
     }
 
-    public static List<Arma> obtenerArmas() {
+    public Arma(int idArma, int idClaseArma, String nombre2, String descripcion2, String requisitoDesbloqueo, int daño2,
+			int precision2, int retroceso2, int manejo2, int movilidad2, int cadencia2, int alcance2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static List<Arma> obtenerArmas() {
         List<Arma> armas = new ArrayList<>();
 
         String usu = "root";

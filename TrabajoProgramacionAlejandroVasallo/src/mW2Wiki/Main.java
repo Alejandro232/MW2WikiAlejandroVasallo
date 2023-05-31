@@ -24,6 +24,8 @@ import mW2Wiki.CLASESBBDD.FaccionBBDD;
 import mW2Wiki.CLASESBBDD.MapaBBDD;
 import mW2Wiki.CLASESBBDD.ModoJuegoBBDD;
 import mW2Wiki.CLASESBBDD.OperadorBBDD;
+import mW2Wiki.CLASESBBDD.Racha_BajasBBDD;
+import mW2Wiki.CLASESBBDD.RequisitosPcBBDD;
 import mW2Wiki.MAPAS.MapaCamuflajeArmas;
 import mW2Wiki.MAPAS.MapaOperadoresFacciones;
 public class Main {
@@ -103,14 +105,13 @@ public class Main {
 		ModoJuegoBBDD modoJuegoBBDD= new ModoJuegoBBDD(usu, pas, puerto, maquina, baseDatos);
 		OperadorBBDD operadorBBDD= new OperadorBBDD(usu, pas, puerto, maquina, baseDatos);
 		Racha_BajasBBDD rachaBajas= new Racha_BajasBBDD(usu, pas, puerto, maquina, baseDatos);
-		
+		RequisitosPcBBDD requisitosPcBBDD= new RequisitosPcBBDD(usu, pas, puerto, maquina, baseDatos);
 
 
 
 
 	        
-	   
-	
+	  
 
 
 
@@ -120,6 +121,7 @@ public class Main {
 
 	        
 	    }
+
 		
 }
 		

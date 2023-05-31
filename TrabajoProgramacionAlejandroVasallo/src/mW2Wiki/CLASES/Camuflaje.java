@@ -20,7 +20,11 @@ public class Camuflaje {
         this.requisitoDesbloqueo = requisitoDesbloqueo;
     }
     
-    public static List<Camuflaje> obtenerCamuflajes() {
+    public Camuflaje(String nombre2, String requisitoDesbloqueo2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static List<Camuflaje> obtenerCamuflajes() {
         List<Camuflaje> camuflajes = new ArrayList<>();
 
         String usu = "root";
