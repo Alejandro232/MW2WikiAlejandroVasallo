@@ -1,4 +1,4 @@
-package mW2Wiki.MENUADMIN;
+package mW2Wiki.MENUUSU;
 
 import mW2Wiki.CLASES.RequisitosPc;
 import mW2Wiki.CLASESBBDD.RequisitosPcBBDD;
@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class menuRequisitosPc {
+public class menuRequisitosPcUsu {
 
     private static final String MENU_OPTIONS =
             "----- Menú de Requisitos de PC -----\n" +
@@ -22,7 +22,7 @@ public class menuRequisitosPc {
     private RequisitosPcBBDD requisitosPcBBDD = new RequisitosPcBBDD("root", "alejandro2002", "3307", "localhost", "mw2wiki");
     private Scanner scanner;
 
-    public menuRequisitosPc() {
+    public menuRequisitosPcUsu() {
         scanner = new Scanner(System.in);
     }
 
@@ -181,7 +181,7 @@ public class menuRequisitosPc {
     }
 
     public static void main(String[] args) {
-        menuRequisitosPc menu = new menuRequisitosPc();
+        menuRequisitosPcUsu menu = new menuRequisitosPcUsu();
         menu.mostrarMenu();
     }
 }

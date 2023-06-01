@@ -9,7 +9,6 @@ import mW2Wiki.CLASESBBDD.ModoJuegoBBDD;
 public class menuModoJuego {
 
     private ModoJuegoBBDD modoJuegoBBDD;
-    private Scanner scanner;
 
     public menuModoJuego() {
         // Configurar los datos de conexión a la base de datos
@@ -20,10 +19,9 @@ public class menuModoJuego {
         String baseDatos = "mw2wiki";
 
         modoJuegoBBDD = new ModoJuegoBBDD(usu, pas, puerto, maquina, baseDatos);
-        scanner = new Scanner(System.in);
     }
 
-    public void mostrarMenu() {
+    public void mostrarMenu(Scanner scanner) {
         boolean salir = false;
 
         while (!salir) {
@@ -36,20 +34,20 @@ public class menuModoJuego {
             System.out.print("Selecciona una opción: ");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea después de leer la opción
+            scanner.nextLine(); // Consumir el salto de línea después de leer el entero
 
             switch (opcion) {
                 case 1:
                     mostrarModosJuego();
                     break;
                 case 2:
-                    agregarModoJuego();
+                    agregarModoJuego(scanner);
                     break;
                 case 3:
-                    actualizarModoJuego();
+                    actualizarModoJuego(scanner);
                     break;
                 case 4:
-                    eliminarModoJuego();
+                    eliminarModoJuego(scanner);
                     break;
                 case 5:
                     salir = true;
@@ -60,8 +58,6 @@ public class menuModoJuego {
 
             System.out.println();
         }
-
-        scanner.close();
     }
 
     private void mostrarModosJuego() {
@@ -75,95 +71,78 @@ public class menuModoJuego {
             System.out.println("--------------------------------------------");
 
             for (ModoJuego modoJuego : modosJuego) {
-                System.out.printf("%-8d%-20s%-30s%n", modoJuego.getIdModo(), modoJuego.getNombre(), modoJuego.getDescripcion());
+                System.out.printf("%-8d%-20s%-30s%n", modoJuego.getIdModo(), modoJuego.getNombre(),
+                        modoJuego.getDescripcion());
             }
         }
     }
 
-
-
-
-    private void agregarModoJuego() {
+    private void agregarModoJuego(Scanner scanner) {
         System.out.println("---- AGREGAR MODO DE JUEGO ----");
 
-        System.out.print("Nombre: ");
+        System.out.print("Ingrese el nombre del modo de juego: ");
         String nombre = scanner.nextLine();
 
-        System.out.print("Descripción: ");
+        System.out.print("Ingrese la descripción del modo de juego: ");
         String descripcion = scanner.nextLine();
 
-        ModoJuego nuevoModoJuego = new ModoJuego(nombre, descripcion);
-        modoJuegoBBDD.insertarModoJuego(nuevoModoJuego);
+        ModoJuego modoJuego = new ModoJuego(nombre, descripcion);
+        modoJuegoBBDD.insertarModoJuego(modoJuego);
 
-        System.out.println("El modo de juego se ha agregado correctamente.");
+        System.out.println("Modo de juego agregado exitosamente.");
     }
 
-    private void actualizarModoJuego() {
+    private void actualizarModoJuego(Scanner scanner) {
         System.out.println("---- ACTUALIZAR MODO DE JUEGO ----");
 
-        System.out.print("ID del modo de juego a actualizar: ");
-        int idModoJuego = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea después de leer el ID
+        System.out.print("Ingrese el ID del modo de juego que desea actualizar: ");
+        int idModo = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea después de leer el entero
 
-        ModoJuego modoJuego = modoJuegoBBDD.obtenerModoJuego(idModoJuego);
+        ModoJuego modoJuegoExistente = modoJuegoBBDD.obtenerModoJuego(idModo);
 
-        if (modoJuego == null) {
-            System.out.println("No se encontró un modo de juego con el ID especificado.");
+        if (modoJuegoExistente == null) {
+            System.out.println("No se encontró un modo de juego con ese ID.");
             return;
         }
 
-        System.out.println("Modo de juego actual:");
-        System.out.println(modoJuego);
-
-        System.out.print("Nuevo nombre (dejar en blanco para mantener el nombre actual): ");
+        System.out.print("Ingrese el nuevo nombre del modo de juego: ");
         String nuevoNombre = scanner.nextLine();
 
-        System.out.print("Nueva descripción (dejar en blanco para mantener la descripción actual): ");
+        System.out.print("Ingrese la nueva descripción del modo de juego: ");
         String nuevaDescripcion = scanner.nextLine();
 
-        if (!nuevoNombre.isEmpty()) {
-            modoJuego.setNombre(nuevoNombre);
-        }
+        ModoJuego modoJuegoActualizado = new ModoJuego(idModo, nuevoNombre, nuevaDescripcion);
+        modoJuegoBBDD.actualizarModoJuego(modoJuegoActualizado);
 
-        if (!nuevaDescripcion.isEmpty()) {
-            modoJuego.setDescripcion(nuevaDescripcion);
-        }
-
-        modoJuegoBBDD.actualizarModoJuego(modoJuego);
-
-        System.out.println("El modo de juego se ha actualizado correctamente.");
+        System.out.println("Modo de juego actualizado exitosamente.");
     }
 
-    private void eliminarModoJuego() {
+    private void eliminarModoJuego(Scanner scanner) {
         System.out.println("---- ELIMINAR MODO DE JUEGO ----");
 
-        System.out.print("ID del modo de juego a eliminar: ");
-        int idModoJuego = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea después de leer el ID
+        System.out.print("Ingrese el ID del modo de juego que desea eliminar: ");
+        int idModo = scanner.nextInt();
+        scanner.nextLine(); // Consumir el salto de línea después de leer el entero
 
-        ModoJuego modoJuego = modoJuegoBBDD.obtenerModoJuego(idModoJuego);
+        ModoJuego modoJuegoExistente = modoJuegoBBDD.obtenerModoJuego(idModo);
 
-        if (modoJuego == null) {
-            System.out.println("No se encontró un modo de juego con el ID especificado.");
+        if (modoJuegoExistente == null) {
+            System.out.println("No se encontró un modo de juego con ese ID.");
             return;
         }
 
-        System.out.println("Modo de juego a eliminar:");
-        System.out.println(modoJuego);
+        modoJuegoBBDD.eliminarModoJuego(idModo);
 
-        System.out.print("¿Estás seguro de que deseas eliminar este modo de juego? (S/N): ");
-        String confirmacion = scanner.nextLine();
-
-        if (confirmacion.equalsIgnoreCase("S")) {
-            modoJuegoBBDD.eliminarModoJuego(idModoJuego);
-            System.out.println("El modo de juego se ha eliminado correctamente.");
-        } else {
-            System.out.println("No se ha eliminado el modo de juego.");
+        System.out.println("Modo de juego eliminado exitosamente.");
+    }
+   
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            menuModoJuego menu = new menuModoJuego();
+            menu.mostrarMenu(scanner);
+            scanner.close();
         }
-    }
 
-    public static void main(String[] args) {
-        menuModoJuego menu = new menuModoJuego();
-        menu.mostrarMenu();
-    }
+	
 }

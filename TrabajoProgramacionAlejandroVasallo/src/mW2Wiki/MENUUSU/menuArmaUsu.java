@@ -1,4 +1,4 @@
-package mW2Wiki.MENUADMIN;
+package mW2Wiki.MENUUSU;
 
 import java.util.List;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 import mW2Wiki.CLASES.Arma;
 import mW2Wiki.CLASESBBDD.ArmaBBDD;
 
-public class menuArma {
+public class menuArmaUsu {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String usu = "root";
     private static final String pas = "alejandro2002";
@@ -38,10 +38,10 @@ public class menuArma {
                     mostrarArmas();
                     break;
                 case 2:
-                    agregarArma();
+                    
                     break;
                 case 3:
-                    eliminarArma();
+                   
                     break;
                 case 4:
                     salir = true;
@@ -71,49 +71,4 @@ public class menuArma {
         }
     }
 
-
-
-
-    private static void agregarArma() {
-        System.out.println("Ingrese los datos del arma:");
-        System.out.print("ID Clase Arma: ");
-        int idClaseArma = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Descripción: ");
-        String descripcion = scanner.nextLine();
-        System.out.print("Requisito de desbloqueo: ");
-        String requisitoDesbloqueo = scanner.nextLine();
-        System.out.print("Daño: ");
-        int daño = scanner.nextInt();
-        System.out.print("Precisión: ");
-        int precision = scanner.nextInt();
-        System.out.print("Retroceso: ");
-        int retroceso = scanner.nextInt();
-        System.out.print("Manejo: ");
-        int manejo = scanner.nextInt();
-        System.out.print("Movilidad: ");
-        int movilidad = scanner.nextInt();
-        System.out.print("Cadencia: ");
-        int cadencia = scanner.nextInt();
-        System.out.print("Alcance: ");
-        int alcance = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-
-        Arma nuevaArma = new Arma( idClaseArma, nombre, descripcion, requisitoDesbloqueo, daño, precision,
-                retroceso, manejo, movilidad, cadencia, alcance);
-
-        armaBBDD.insertarArma(nuevaArma);
-        System.out.println("El arma se ha agregado correctamente a la base de datos.");
-    }
-
-    private static void eliminarArma() {
-        System.out.print("Ingrese el ID del arma que desea eliminar: ");
-        int idArma = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-
-        armaBBDD.eliminarArma(idArma);
-        System.out.println("El arma se ha eliminado correctamente de la base de datos.");
-    }
 }

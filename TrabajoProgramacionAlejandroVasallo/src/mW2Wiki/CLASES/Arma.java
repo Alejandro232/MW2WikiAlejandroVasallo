@@ -28,7 +28,6 @@ public class Arma {
     public Arma(int id_Arma, String nombre, String descripcion, String requisito_Desbloqueo,
                 int daño, int precision, int retroceso, int manejo, int movilidad,
                 int cadencia, int alcance, ArrayList<Accesorio> accesorios, ArrayList<Camuflaje> camuflajes) {
-        this.id_Arma = id_Arma;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.requisito_Desbloqueo = requisito_Desbloqueo;
@@ -43,9 +42,8 @@ public class Arma {
         this.camuflajes = camuflajes;
     }
 
-    public Arma(int idArma, int idClaseArma, String nombre, String descripcion, String requisitoDesbloqueo, int daño,
+    public Arma( int idClaseArma, String nombre, String descripcion, String requisitoDesbloqueo, int daño,
 			int precision, int retroceso, int manejo, int movilidad, int cadencia, int alcance) {
-    this.id_Arma = idArma;
     this.idClaseArma=idClaseArma;
     this.nombre = nombre;
     this.descripcion = descripcion;
@@ -59,7 +57,7 @@ public class Arma {
     this.alcance = alcance;
 }
 
-	public static List<Arma> obtenerArmas() {
+    public static List<Arma> obtenerArmas() {
         List<Arma> armas = new ArrayList<>();
 
         String usu = "root";
@@ -92,6 +90,10 @@ public class Arma {
 
                 Arma arma = new Arma(idArma, nombre, descripcion, requisitoDesbloqueo, daño,
                         precision, retroceso, manejo, movilidad, cadencia, alcance, accesorios, camuflajes);
+                
+                // Asignar el valor del ID de la base de datos a la instancia de Arma
+                arma.setId_Arma(idArma);
+                
                 armas.add(arma);
             }
         } catch (SQLException e) {

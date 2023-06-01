@@ -34,20 +34,19 @@ public class ArmaBBDD {
 
     public void insertarArma(Arma arma) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-                PreparedStatement statement = connection.prepareStatement("INSERT INTO Arma (id_Arma, id_Clase_Arma, nombre, descripcion, requisito_Desbloqueo, daño, `precision`, retroceso, manejo, movilidad, cadencia, alcance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO Arma (id_Clase_Arma, nombre, descripcion, requisito_Desbloqueo, daño, `precision`, retroceso, manejo, movilidad, cadencia, alcance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
-            statement.setInt(1, arma.getId_Arma());
-            statement.setInt(2, arma.getId_Clase_Arma());
-            statement.setString(3, arma.getNombre());
-            statement.setString(4, arma.getDescripcion());
-            statement.setString(5, arma.getRequisito_Desbloqueo());
-            statement.setInt(6, arma.getDaño());
-            statement.setFloat(7, arma.getPrecision());
-            statement.setFloat(8, arma.getRetroceso());
-            statement.setFloat(9, arma.getManejo());
-            statement.setFloat(10, arma.getMovilidad());
-            statement.setFloat(11, arma.getCadencia());
-            statement.setFloat(12, arma.getAlcance());
+            statement.setInt(1, arma.getId_Clase_Arma());
+            statement.setString(2, arma.getNombre());
+            statement.setString(3, arma.getDescripcion());
+            statement.setString(4, arma.getRequisito_Desbloqueo());
+            statement.setInt(5, arma.getDaño());
+            statement.setInt(6, arma.getPrecision());
+            statement.setInt(7, arma.getRetroceso());
+            statement.setInt(8, arma.getManejo());
+            statement.setInt(9, arma.getMovilidad());
+            statement.setInt(10, arma.getCadencia());
+            statement.setInt(11, arma.getAlcance());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -55,8 +54,6 @@ public class ArmaBBDD {
             // Manejo de excepciones en caso de error de conexión o consulta
         }
     }
-
-
 
     public void eliminarArma(int idArma) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
@@ -92,37 +89,5 @@ public class ArmaBBDD {
             e.printStackTrace();
             // Manejo de excepciones en caso de error de conexión o consulta
         }
-    }
-
-    public List<Arma> obtenerArmas() {
-        List<Arma> armas = new ArrayList<>();
-
-        try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM Arma")) {
-
-            while (resultSet.next()) {
-                int idArma = resultSet.getInt("id_Arma");
-                String nombre = resultSet.getString("nombre");
-                String descripcion = resultSet.getString("descripcion");
-                String requisitoDesbloqueo = resultSet.getString("requisito_Desbloqueo");
-                int daño = resultSet.getInt("daño");
-                int precision = resultSet.getInt("precision");
-                int retroceso = resultSet.getInt("retroceso");
-                int manejo = resultSet.getInt("manejo");
-                int movilidad = resultSet.getInt("movilidad");
-                int cadencia = resultSet.getInt("cadencia");
-                int alcance = resultSet.getInt("alcance");
-
-                Arma arma = new Arma(idArma, nombre, descripcion, requisitoDesbloqueo, daño,
-                        precision, retroceso, manejo, movilidad, cadencia, alcance, null, null);
-                armas.add(arma);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Manejo de excepciones en caso de error de conexión o consulta
-        }
-
-        return armas;
     }
 }

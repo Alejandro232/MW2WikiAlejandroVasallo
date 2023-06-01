@@ -18,50 +18,53 @@ public class MENUADMINCOMPLETO {
             while (!salir) {
                 mostrarMenu();
                 System.out.print("Ingrese una opción: ");
-                int opcion = scanner.nextInt();
-                scanner.nextLine(); // Limpiar el búfer del scanner
 
-                switch (opcion) {
-                    case 1:
-                        menuAccesorios.main(args);
-                        break;
-                    case 2:
-                        menuArma.main(args);;
-                        break;
-                    case 3:
-                        menuAspecto.main(args);;
-                        break;
-                    case 4:
-                        menuCamuflaje.main(args);;
-                        break;
-                    case 5:
-                        menuClaseArma.main(args);;
-                        break;
-                    case 6:
-                        menuFaccion.main(args);;
-                        break;
-                    case 7:
-                        menuMapa.main(args);
-                        break;
-                    case 8:
-                        menuModoJuego.main(args);;
-                        break;
-                    case 9:
-                        menuOperador.main(args);;
-                        break;
-                    case 10:
-                       menuRachaBajas.main(args);
-                        break;
-                    case 11:
-                        menuRequisitosPc.main(args);
-                        break;
-                    case 12:
-                        salir = true;
-                        System.out.println("Saliendo del programa...");
-                        break;
-                    default:
-                        System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
-                        break;
+                if (scanner.hasNextInt()) {
+                    int opcion = scanner.nextInt();
+                    scanner.nextLine(); // Consumir el salto de línea
+
+                    switch (opcion) {
+                        case 1:
+                            menuAccesorios.main(args);
+                            break;
+                        case 2:
+                            menuArma.main(args);
+                            break;
+                        case 3:
+                            menuAspecto.main(args);
+                            break;
+                        case 4:
+                            menuCamuflaje.main(args);
+                            break;
+                        case 5:
+                            menuClaseArma.main(args);
+                            break;
+                        case 6:
+                            menuFaccion.main(args);
+                            break;
+                        case 7:
+                            menuMapa.main(args);
+                            break;
+                        case 8:
+                            menuOperador.main(args);
+                            break;
+                        case 9:
+                            menuRachaBajas.main(args);
+                            break;
+                        case 10:
+                            menuRequisitosPc.main(args);
+                            break;
+                        case 11:
+                            salir = true;
+                            System.out.println("Saliendo del programa...");
+                            break;
+                        default:
+                            System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
+                            break;
+                    }
+                } else {
+                    System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
+                    scanner.nextLine(); // Consumir el salto de línea
                 }
                 System.out.println();
             }
@@ -81,13 +84,9 @@ public class MENUADMINCOMPLETO {
         System.out.println("5. Clases de Armas");
         System.out.println("6. Facciones");
         System.out.println("7. Mapas");
-        System.out.println("8. Modos de Juego");
-        System.out.println("9. Operadores");
-        System.out.println("10. Rachas de Bajas");
-        System.out.println("11. Requisitos para jugar en PC");
-        System.out.println("12. Salir");
+        System.out.println("8. Operadores");
+        System.out.println("9. Rachas de Bajas");
+        System.out.println("10. Requisitos para jugar en PC");
+        System.out.println("11. Salir");
     }
-
-   
 }
-

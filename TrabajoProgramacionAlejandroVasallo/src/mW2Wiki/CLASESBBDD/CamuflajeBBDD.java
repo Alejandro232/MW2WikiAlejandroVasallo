@@ -100,4 +100,24 @@ public class CamuflajeBBDD {
 
         return camuflajes;
     }
+    public String obtenerNombreArma(int idArma) {
+        String nombreArma = "";
+        try {
+            Connection connection = DriverManager.getConnection(url, usu, pas);
+            String query = "SELECT nombre FROM Arma WHERE id_Arma = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, idArma);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                nombreArma = resultSet.getString("nombre");
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nombreArma;
+    }
+
 }
