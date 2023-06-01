@@ -34,10 +34,10 @@ public class OperadorBBDD {
 
     public void insertarOperador(Operador operador) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO Operador (id_Operador, nombre, genero, altura) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO Operador (id_Operador, id_Faccion, genero, altura) VALUES (?, ?, ?, ?)")) {
 
             statement.setInt(1, operador.getIdOperador());
-            statement.setString(2, operador.getNombre());
+            statement.setInt(2, operador.getIdFaccion());
             statement.setString(3, operador.getGenero());
             statement.setFloat(4, operador.getAltura());
 
@@ -63,9 +63,9 @@ public class OperadorBBDD {
 
     public void actualizarOperador(Operador operador) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("UPDATE Operador SET nombre = ?, genero = ?, altura = ? WHERE id_Operador = ?")) {
+             PreparedStatement statement = connection.prepareStatement("UPDATE Operador SET id_Faccion = ?, genero = ?, altura = ? WHERE id_Operador = ?")) {
 
-            statement.setString(1, operador.getNombre());
+            statement.setInt(1, operador.getIdFaccion());
             statement.setString(2, operador.getGenero());
             statement.setFloat(3, operador.getAltura());
             statement.setInt(4, operador.getIdOperador());
@@ -86,11 +86,11 @@ public class OperadorBBDD {
 
             while (resultSet.next()) {
                 int idOperador = resultSet.getInt("id_Operador");
-                String nombre = resultSet.getString("nombre");
+                int idFaccion = resultSet.getInt("id_Faccion");
                 String genero = resultSet.getString("genero");
                 float altura = resultSet.getFloat("altura");
 
-                Operador operador = new Operador(idOperador, nombre, genero, altura);
+                Operador operador = new Operador(idOperador, idFaccion, genero, altura);
                 operadores.add(operador);
             }
         } catch (SQLException e) {

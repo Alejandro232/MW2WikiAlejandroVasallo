@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Racha_Bajas {
 
-	private int idRachaBajas;
+    private int idRachaBajas;
     private String nombre;
     private String descripcion;
     private int puntosNecesarios;
@@ -22,6 +22,12 @@ public class Racha_Bajas {
         this.puntosNecesarios = puntosNecesarios;
     }
     
+    public Racha_Bajas(String nombre, String descripcion, int puntosNecesarios) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.puntosNecesarios = puntosNecesarios;
+    }
+
     public static List<Racha_Bajas> obtenerRachasBajas() {
         List<Racha_Bajas> rachasBajas = new ArrayList<>();
 
@@ -51,10 +57,6 @@ public class Racha_Bajas {
         }
 
         return rachasBajas;
-    }
-
-    public Racha_Bajas(int idRachaBajas) {
-        this.idRachaBajas = idRachaBajas;
     }
 
     public int getIdRachaBajas() {
@@ -91,12 +93,11 @@ public class Racha_Bajas {
 
     @Override
     public String toString() {
-        return "RachaBajas{" +
+        return "Racha_Bajas{" +
                 "idRachaBajas=" + idRachaBajas +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", puntosNecesarios=" + puntosNecesarios +
                 '}';
     }
-	
 }

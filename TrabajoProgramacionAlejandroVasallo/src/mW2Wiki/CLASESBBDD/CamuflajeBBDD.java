@@ -34,11 +34,12 @@ public class CamuflajeBBDD {
 
     public void insertarCamuflaje(Camuflaje camuflaje) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO Camuflaje (id_Camuflaje, nombre, requisito_Desbloqueo) VALUES (?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO Camuflaje (id_Camuflaje, nombre, requisito_Desbloqueo, id_Arma) VALUES (?, ?, ?, ?)")) {
 
             statement.setInt(1, camuflaje.getIdCamuflaje());
             statement.setString(2, camuflaje.getNombre());
             statement.setString(3, camuflaje.getRequisitoDesbloqueo());
+            statement.setInt(4, camuflaje.getId_Arma());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -62,11 +63,12 @@ public class CamuflajeBBDD {
 
     public void actualizarCamuflaje(Camuflaje camuflaje) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("UPDATE Camuflaje SET nombre = ?, requisito_Desbloqueo = ? WHERE id_Camuflaje = ?")) {
+             PreparedStatement statement = connection.prepareStatement("UPDATE Camuflaje SET nombre = ?, requisito_Desbloqueo = ?, id_Arma = ? WHERE id_Camuflaje = ?")) {
 
             statement.setString(1, camuflaje.getNombre());
             statement.setString(2, camuflaje.getRequisitoDesbloqueo());
-            statement.setInt(3, camuflaje.getIdCamuflaje());
+            statement.setInt(3, camuflaje.getId_Arma());
+            statement.setInt(4, camuflaje.getIdCamuflaje());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -86,8 +88,9 @@ public class CamuflajeBBDD {
                 int idCamuflaje = resultSet.getInt("id_Camuflaje");
                 String nombre = resultSet.getString("nombre");
                 String requisitoDesbloqueo = resultSet.getString("requisito_Desbloqueo");
+                int id_Arma = resultSet.getInt("id_Arma");
 
-                Camuflaje camuflaje = new Camuflaje(idCamuflaje, nombre, requisitoDesbloqueo);
+                Camuflaje camuflaje = new Camuflaje(idCamuflaje, nombre, requisitoDesbloqueo, id_Arma);
                 camuflajes.add(camuflaje);
             }
         } catch (SQLException e) {

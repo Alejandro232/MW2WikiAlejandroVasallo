@@ -34,19 +34,20 @@ public class ArmaBBDD {
 
     public void insertarArma(Arma arma) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO Arma (id_Arma, nombre, descripcion, requisito_Desbloqueo, daño, precision, retroceso, manejo, movilidad, cadencia, alcance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                PreparedStatement statement = connection.prepareStatement("INSERT INTO Arma (id_Arma, id_Clase_Arma, nombre, descripcion, requisito_Desbloqueo, daño, `precision`, retroceso, manejo, movilidad, cadencia, alcance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
             statement.setInt(1, arma.getId_Arma());
-            statement.setString(2, arma.getNombre());
-            statement.setString(3, arma.getDescripcion());
-            statement.setString(4, arma.getRequisito_Desbloqueo());
-            statement.setInt(5, arma.getDaño());
-            statement.setInt(6, arma.getPrecision());
-            statement.setInt(7, arma.getRetroceso());
-            statement.setInt(8, arma.getManejo());
-            statement.setInt(9, arma.getMovilidad());
-            statement.setInt(10, arma.getCadencia());
-            statement.setInt(11, arma.getAlcance());
+            statement.setInt(2, arma.getId_Clase_Arma());
+            statement.setString(3, arma.getNombre());
+            statement.setString(4, arma.getDescripcion());
+            statement.setString(5, arma.getRequisito_Desbloqueo());
+            statement.setInt(6, arma.getDaño());
+            statement.setFloat(7, arma.getPrecision());
+            statement.setFloat(8, arma.getRetroceso());
+            statement.setFloat(9, arma.getManejo());
+            statement.setFloat(10, arma.getMovilidad());
+            statement.setFloat(11, arma.getCadencia());
+            statement.setFloat(12, arma.getAlcance());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -54,6 +55,8 @@ public class ArmaBBDD {
             // Manejo de excepciones en caso de error de conexión o consulta
         }
     }
+
+
 
     public void eliminarArma(int idArma) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);

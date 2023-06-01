@@ -1,12 +1,12 @@
 package mW2Wiki.CLASES;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ModoJuego {
 
-	private int idModo;
+    private int idModo;
     private String nombre;
     private String descripcion;
 
@@ -15,7 +15,10 @@ public class ModoJuego {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-    
+    public ModoJuego(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
     public static List<ModoJuego> obtenerModosJuego() {
         List<ModoJuego> modosJuego = new ArrayList<>();
 
@@ -45,14 +48,6 @@ public class ModoJuego {
 
         return modosJuego;
     }
-    
-    
-    
-    
-
-    public ModoJuego(int idModo) {
-        this.idModo = idModo;
-    }
 
     public int getIdModo() {
         return idModo;
@@ -80,14 +75,10 @@ public class ModoJuego {
 
     @Override
     public String toString() {
-        return "Modo{" +
+        return "ModoJuego{" +
                 "idModo=" + idModo +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
-	
-	
-	
-	
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Arma {
     private int id_Arma;
+    private int idClaseArma;
     private String nombre;
     private String descripcion;
     private String requisito_Desbloqueo;
@@ -42,10 +43,21 @@ public class Arma {
         this.camuflajes = camuflajes;
     }
 
-    public Arma(int idArma, int idClaseArma, String nombre2, String descripcion2, String requisitoDesbloqueo, int daño2,
-			int precision2, int retroceso2, int manejo2, int movilidad2, int cadencia2, int alcance2) {
-		// TODO Auto-generated constructor stub
-	}
+    public Arma(int idArma, int idClaseArma, String nombre, String descripcion, String requisitoDesbloqueo, int daño,
+			int precision, int retroceso, int manejo, int movilidad, int cadencia, int alcance) {
+    this.id_Arma = idArma;
+    this.idClaseArma=idClaseArma;
+    this.nombre = nombre;
+    this.descripcion = descripcion;
+    this.requisito_Desbloqueo = requisitoDesbloqueo;
+    this.daño = daño;
+    this.precision = precision;
+    this.retroceso = retroceso;
+    this.manejo = manejo;
+    this.movilidad = movilidad;
+    this.cadencia = cadencia;
+    this.alcance = alcance;
+}
 
 	public static List<Arma> obtenerArmas() {
         List<Arma> armas = new ArrayList<>();
@@ -241,4 +253,9 @@ public class Arma {
                 ", camuflajes=" + camuflajes +
                 '}';
     }
+
+	public int getId_Clase_Arma() {
+		// TODO Auto-generated method stub
+		return idClaseArma;
+	}
 }

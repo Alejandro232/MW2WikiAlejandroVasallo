@@ -11,13 +11,13 @@ import java.util.List;
 public class Operador {
 
     private int idOperador;
-    private String nombre;
+    private int idFaccion; 
     private String genero;
     private float altura;
 
-    public Operador(int idOperador, String nombre, String genero, float altura) {
+    public Operador(int idOperador, int idFaccion, String genero, float altura) {
         this.idOperador = idOperador;
-        this.nombre = nombre;
+        this.idFaccion = idFaccion;
         this.genero = genero;
         this.altura = altura;
     }
@@ -38,11 +38,11 @@ public class Operador {
 
             while (resultSet.next()) {
                 int idOperador = resultSet.getInt("id_Operador");
-                String nombre = resultSet.getString("nombre");
+                int idFaccion = resultSet.getInt("id_Faccion");
                 String genero = resultSet.getString("genero");
                 float altura = resultSet.getFloat("altura");
 
-                Operador operador = new Operador(idOperador, nombre, genero, altura);
+                Operador operador = new Operador(idOperador, idFaccion, genero, altura);
                 operadores.add(operador);
             }
         } catch (SQLException e) {
@@ -61,12 +61,12 @@ public class Operador {
         this.idOperador = idOperador;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getIdFaccion() {
+        return idFaccion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdFaccion(int idFaccion) {
+        this.idFaccion = idFaccion;
     }
 
     public String getGenero() {
@@ -89,7 +89,7 @@ public class Operador {
     public String toString() {
         return "Operador{" +
                 "idOperador=" + idOperador +
-                ", nombre='" + nombre + '\'' +
+                ", idFaccion=" + idFaccion +
                 ", genero='" + genero + '\'' +
                 ", altura=" + altura +
                 '}';

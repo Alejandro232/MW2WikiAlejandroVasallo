@@ -53,16 +53,23 @@ public class menuAccesorios {
 
     private static void mostrarAccesorios() {
         List<Accesorio> accesorios = Accesorio.obtenerAccesorios();
-        
+
         if (accesorios.isEmpty()) {
             System.out.println("No hay accesorios disponibles.");
         } else {
             System.out.println("=== Accesorios ===");
+            System.out.printf("%-5s %-20s %-50s\n", "ID", "Nombre", "Descripción");
+            System.out.println("-------------------------------------------------------------");
             for (Accesorio accesorio : accesorios) {
-                System.out.println(accesorio);
+                System.out.printf("%-5d %-20s %-50s\n",
+                        accesorio.getId_Accesorio(), accesorio.getNombre(), accesorio.getDescripcion());
             }
         }
     }
+
+
+
+
 
     private static void agregarAccesorio() {
         System.out.println("Ingrese los datos del nuevo accesorio:");

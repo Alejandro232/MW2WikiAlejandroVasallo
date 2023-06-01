@@ -34,11 +34,10 @@ public class ModoJuegoBBDD {
 
     public void insertarModoJuego(ModoJuego modoJuego) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO Modo_Juego (id_Modo, nombre, descripcion) VALUES (?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO Modo_Juego (nombre, descripcion) VALUES (?, ?)")) {
 
-            statement.setInt(1, modoJuego.getIdModo());
-            statement.setString(2, modoJuego.getNombre());
-            statement.setString(3, modoJuego.getDescripcion());
+            statement.setString(1, modoJuego.getNombre());
+            statement.setString(2, modoJuego.getDescripcion());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -97,4 +96,30 @@ public class ModoJuegoBBDD {
 
         return modosJuego;
     }
+
+	public ModoJuego obtenerModoJuego(int idModoJuego) {
+    ModoJuego modoJuego = null;
+
+    try (Connection connection = DriverManager.getConnection(url, usu, pas);
+         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Modo_Juego WHERE id_Modo = ?")) {
+
+        statement.setInt(1, idModoJuego);
+
+        try (ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                int idModo = resultSet.getInt("id_Modo");
+                String nombre = resultSet.getString("nombre");
+                String descripcion = resultSet.getString("descripcion");
+
+                modoJuego = new ModoJuego(idModo, nombre, descripcion);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Manejo de excepciones en caso de error de conexión o consulta
+    }
+
+    return modoJuego;
+}
+
 }

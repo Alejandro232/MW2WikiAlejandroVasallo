@@ -20,25 +20,20 @@ public class MapaBBDD {
     private String url;
 
     public MapaBBDD() {
-
-    }
-
-    public MapaBBDD(String usu, String pas, String puerto, String maquina, String baseDatos) {
-        this.usu = usu;
-        this.pas = pas;
-        this.puerto = puerto;
-        this.maquina = maquina;
-        this.baseDatos = baseDatos;
+        this.usu = "root";
+        this.pas = "alejandro2002";
+        this.puerto = "3307";
+        this.maquina = "localhost";
+        this.baseDatos = "mw2wiki";
         this.url = "jdbc:mysql://" + maquina + ":" + puerto + "/" + baseDatos;
     }
 
     public void insertarMapa(Mapa mapa) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO Mapa (id_Mapa, nombre, descripcion) VALUES (?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO Mapa (nombre, descripcion) VALUES (?, ?)")) {
 
-            statement.setInt(1, mapa.getIdMapa());
-            statement.setString(2, mapa.getNombre());
-            statement.setString(3, mapa.getDescripcion());
+            statement.setString(1, mapa.getNombre());
+            statement.setString(2, mapa.getDescripcion());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -97,4 +92,29 @@ public class MapaBBDD {
 
         return mapas;
     }
+
+	public Mapa buscarMapaPorId(int idMapa) {
+    Mapa mapa = null;
+
+    try (Connection connection = DriverManager.getConnection(url, usu, pas);
+         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Mapa WHERE id_Mapa = ?")) {
+
+        statement.setInt(1, idMapa);
+
+        try (ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                String nombre = resultSet.getString("nombre");
+                String descripcion = resultSet.getString("descripcion");
+
+                mapa = new Mapa(idMapa, nombre, descripcion);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Manejo de excepciones en caso de error de conexión o consulta
+    }
+
+    return mapa;
+}
+
 }

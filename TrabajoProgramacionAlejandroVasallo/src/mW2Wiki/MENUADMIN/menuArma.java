@@ -54,13 +54,25 @@ public class menuArma {
     }
 
     private static void mostrarArmas() {
-        System.out.println("=== Armas registradas ===");
-        List<Arma> armas = armaBBDD.obtenerArmas();
+        List<Arma> armas = Arma.obtenerArmas();
         for (Arma arma : armas) {
-            System.out.println(arma);
+            System.out.printf("ID: %d%n", arma.getId_Arma());
+            System.out.printf("Nombre: %s%n", arma.getNombre());
+            System.out.printf("Descripción: %s%n", arma.getDescripcion());
+            System.out.printf("Requisito de Desbloqueo: %s%n", arma.getRequisito_Desbloqueo());
+            System.out.printf("Daño: %d%n", arma.getDaño());
+            System.out.printf("Precisión: %d%n", arma.getPrecision());
+            System.out.printf("Retroceso: %d%n", arma.getRetroceso());
+            System.out.printf("Manejo: %d%n", arma.getManejo());
+            System.out.printf("Movilidad: %d%n", arma.getMovilidad());
+            System.out.printf("Cadencia: %d%n", arma.getCadencia());
+            System.out.printf("Alcance: %d%n", arma.getAlcance());
+            System.out.println("------------------------------");
         }
-        System.out.println("==========================");
     }
+
+
+
 
     private static void agregarArma() {
         System.out.println("Ingrese los datos del arma:");

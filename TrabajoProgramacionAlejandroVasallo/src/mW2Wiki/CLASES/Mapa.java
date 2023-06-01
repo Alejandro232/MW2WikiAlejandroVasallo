@@ -20,6 +20,11 @@ public class Mapa {
         this.descripcion = descripcion;
     }
     
+    public Mapa(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    
     public static List<Mapa> obtenerMapas() {
         List<Mapa> mapas = new ArrayList<>();
 

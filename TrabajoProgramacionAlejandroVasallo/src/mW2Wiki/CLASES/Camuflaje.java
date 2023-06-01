@@ -13,18 +13,22 @@ public class Camuflaje {
     private int idCamuflaje;
     private String nombre;
     private String requisitoDesbloqueo;
+    private int id_Arma;
 
-    public Camuflaje(int idCamuflaje, String nombre, String requisitoDesbloqueo) {
+    public Camuflaje(int idCamuflaje, String nombre, String requisitoDesbloqueo, int id_Arma) {
         this.idCamuflaje = idCamuflaje;
         this.nombre = nombre;
         this.requisitoDesbloqueo = requisitoDesbloqueo;
+        this.id_Arma = id_Arma;
     }
     
-    public Camuflaje(String nombre2, String requisitoDesbloqueo2) {
-		// TODO Auto-generated constructor stub
-	}
+    public Camuflaje(String nombre, String requisitoDesbloqueo, int id_Arma) {
+        this.nombre = nombre;
+        this.requisitoDesbloqueo = requisitoDesbloqueo;
+        this.id_Arma = id_Arma;
+    }
 
-	public static List<Camuflaje> obtenerCamuflajes() {
+    public static List<Camuflaje> obtenerCamuflajes() {
         List<Camuflaje> camuflajes = new ArrayList<>();
 
         String usu = "root";
@@ -42,8 +46,9 @@ public class Camuflaje {
                 int idCamuflaje = resultSet.getInt("id_Camuflaje");
                 String nombre = resultSet.getString("nombre");
                 String requisitoDesbloqueo = resultSet.getString("requisito_Desbloqueo");
+                int id_Arma = resultSet.getInt("id_Arma");
 
-                Camuflaje camuflaje = new Camuflaje(idCamuflaje, nombre, requisitoDesbloqueo);
+                Camuflaje camuflaje = new Camuflaje(idCamuflaje, nombre, requisitoDesbloqueo, id_Arma);
                 camuflajes.add(camuflaje);
             }
         } catch (SQLException e) {
@@ -76,5 +81,13 @@ public class Camuflaje {
 
     public void setRequisitoDesbloqueo(String requisitoDesbloqueo) {
         this.requisitoDesbloqueo = requisitoDesbloqueo;
+    }
+    
+    public int getId_Arma() {
+        return id_Arma;
+    }
+
+    public void setId_Arma(int id_Arma) {
+        this.id_Arma = id_Arma;
     }
 }
