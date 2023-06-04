@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class menuFaccion {
-    private FaccionBBDD faccionBBDD;
+    private FaccionBBDD faccionBBDD = new FaccionBBDD("root", "alejandro2002", "3307", "localhost", "mw2wiki");
     private Scanner scanner;
 
     public menuFaccion(FaccionBBDD faccionBBDD) {
@@ -55,14 +55,21 @@ public class menuFaccion {
     private void mostrarFacciones() {
         System.out.println("===== LISTA DE FACCIONES =====");
         List<Faccion> facciones = faccionBBDD.obtenerFacciones();
+        
         if (facciones.isEmpty()) {
             System.out.println("No hay facciones registradas.");
         } else {
+            System.out.println("| ID   | Nombre                | Descripción            |");
+            System.out.println("+------+-----------------------+-----------------------+");
+            
             for (Faccion faccion : facciones) {
-                System.out.println(faccion);
+                System.out.printf("| %-4d | %-21s | %-21s |%n", faccion.getIdFaccion(), faccion.getNombre(), faccion.getDescripcion());
             }
+            
+            System.out.println("+------+-----------------------+-----------------------+");
         }
     }
+
 
     private void agregarFaccion() {
         System.out.println("===== AGREGAR FACCIÓN =====");
@@ -133,8 +140,15 @@ public class menuFaccion {
     }
 
     public static void main(String[] args) {
-        FaccionBBDD faccionBBDD = new FaccionBBDD(); // Reemplaza esta línea con tu propia lógica de inicialización de la base de datos
+        String usu = "root";
+        String pas = "alejandro2002";
+        String puerto = "3307";
+        String maquina = "localhost";
+        String baseDatos = "mw2wiki";
+
+        FaccionBBDD faccionBBDD = new FaccionBBDD(usu, pas, puerto, maquina, baseDatos);
         menuFaccion menu = new menuFaccion(faccionBBDD);
         menu.mostrarMenu();
     }
+
 }

@@ -23,8 +23,6 @@ public class menuAccesoriosUsu {
         while (!salir) {
             System.out.println("=== Menú de Gestión de Accesorios ===");
             System.out.println("1. Mostrar accesorios");
-            System.out.println("2. Agregar un accesorio");
-            System.out.println("3. Eliminar un accesorio");
             System.out.println("4. Salir");
             System.out.print("Ingrese una opción: ");
 

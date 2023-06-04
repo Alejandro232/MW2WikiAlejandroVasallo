@@ -1,5 +1,4 @@
 package mW2Wiki.MENUUSU;
-
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,10 +16,7 @@ public class menuClaseArmaUsu {
         while (!salir) {
             System.out.println("=== Menú Clase de Arma ===");
             System.out.println("1. Mostrar Clases de Arma");
-            System.out.println("2. Agregar Clase de Arma");
-            System.out.println("3. Actualizar Clase de Arma");
-            System.out.println("4. Eliminar Clase de Arma");
-            System.out.println("5. Salir");
+            System.out.println("2. Salir");
 
             try {
                 int opcion = leerEntero("Ingrese una opción: ");
@@ -31,15 +27,6 @@ public class menuClaseArmaUsu {
                         mostrarClasesArma();
                         break;
                     case 2:
-                      
-                        break;
-                    case 3:
-                       
-                        break;
-                    case 4:
-                        
-                        break;
-                    case 5:
                         salir = true;
                         System.out.println("Saliendo del programa...");
                         break;
@@ -85,4 +72,3 @@ public class menuClaseArmaUsu {
         return scanner.next();
     }
 }
-

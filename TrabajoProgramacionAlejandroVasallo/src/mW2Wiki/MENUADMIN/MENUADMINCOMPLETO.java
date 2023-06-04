@@ -69,7 +69,7 @@ public class MENUADMINCOMPLETO {
                 System.out.println();
             }
         } else {
-            System.out.println("Contraseña incorrecta. No tiene acceso al programa gestos de la BBDD MW2WIKI.");
+            System.out.println("Contraseña incorrecta. No tiene acceso al programa gestor de la BBDD MW2WIKI.");
         }
 
         scanner.close();

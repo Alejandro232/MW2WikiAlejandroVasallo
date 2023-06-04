@@ -1,5 +1,4 @@
 package mW2Wiki.MENUUSU;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,18 +19,9 @@ public class menuCamuflajeUsu {
 
             switch (opcion) {
                 case 1:
-                 
-                    break;
-                case 2:
-                   
-                    break;
-                case 3:
-                   
-                    break;
-                case 4:
                     mostrarCamuflajes();
                     break;
-                case 5:
+                case 2:
                     salir = true;
                     System.out.println("¡Hasta luego!");
                     break;
@@ -44,11 +34,8 @@ public class menuCamuflajeUsu {
 
     private static void mostrarMenu() {
         System.out.println("----- Menú Camuflaje -----");
-        System.out.println("1. Insertar camuflaje");
-        System.out.println("2. Eliminar camuflaje");
-        System.out.println("3. Actualizar camuflaje");
-        System.out.println("4. Mostrar camuflajes");
-        System.out.println("5. Salir");
+        System.out.println("1. Mostrar camuflajes");
+        System.out.println("2. Salir");
     }
 
     private static int obtenerOpcion() {

@@ -20,10 +20,7 @@ public class menuAspectoUsu {
 
         while (!salir) {
             System.out.println("----- Menú de Aspectos -----");
-            System.out.println("1. Insertar aspecto");
-            System.out.println("2. Eliminar aspecto");
-            System.out.println("3. Actualizar aspecto");
-            System.out.println("4. Mostrar aspectos");
+            System.out.println("1. Mostrar aspectos");
             System.out.println("0. Salir");
             System.out.println("-----------------------------");
             System.out.print("Seleccione una opción: ");
@@ -40,15 +37,6 @@ public class menuAspectoUsu {
 
             switch (opcion) {
                 case 1:
-                
-                    break;
-                case 2:
-                  
-                    break;
-                case 3:
-                  
-                    break;
-                case 4:
                     mostrarAspectos();
                     break;
                 case 0:

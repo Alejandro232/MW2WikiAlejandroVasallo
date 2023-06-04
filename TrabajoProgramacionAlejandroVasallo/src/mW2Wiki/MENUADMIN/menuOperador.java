@@ -1,6 +1,8 @@
 package mW2Wiki.MENUADMIN;
 
+import mW2Wiki.CLASES.Faccion;
 import mW2Wiki.CLASES.Operador;
+import mW2Wiki.CLASESBBDD.FaccionBBDD;
 import mW2Wiki.CLASESBBDD.OperadorBBDD;
 
 import java.util.List;
@@ -28,7 +30,9 @@ public class menuOperador {
                     crearOperador(scanner, operadorBBDD);
                     break;
                 case 2:
-                    mostrarOperadores(operadorBBDD);
+                	FaccionBBDD faccionBBDD = new FaccionBBDD("root", "alejandro2002", "3307", "localhost", "mw2wiki"); // Crear una instancia de FaccionBBDD si no la tienes
+
+                    mostrarOperadores(operadorBBDD,faccionBBDD);
                     break;
                 case 3:
                     actualizarOperador(scanner, operadorBBDD);
@@ -70,23 +74,41 @@ public class menuOperador {
         System.out.println();
     }
 
-    private static void mostrarOperadores(OperadorBBDD operadorBBDD) {
+    private static void mostrarOperadores(OperadorBBDD operadorBBDD, FaccionBBDD faccionBBDD) {
         System.out.println("=== Mostrar Operadores ===");
         List<Operador> operadores = operadorBBDD.obtenerOperadores();
 
         if (operadores.isEmpty()) {
             System.out.println("No se encontraron operadores.");
         } else {
-            System.out.printf("%-15s %-15s %-15s %-15s%n", "ID Operador", "ID Facción", "Género", "Altura");
+            System.out.printf("%-15s %-15s %-15s %-15s%n", "ID Operador", "Facción", "Género", "Altura");
             System.out.println("---------------------------------------------");
+
             for (Operador operador : operadores) {
-                System.out.printf("%-15d %-15d %-15s %-15.2f%n", operador.getIdOperador(), operador.getIdFaccion(),
+                Faccion faccion = obtenerFaccionPorId(faccionBBDD, operador.getIdFaccion());
+                String nombreFaccion = faccion != null ? faccion.getNombre() : "Desconocida";
+
+                System.out.printf("%-15d %-15s %-15s %-15.2f%n", operador.getIdOperador(), nombreFaccion,
                         operador.getGenero(), operador.getAltura());
             }
         }
 
         System.out.println();
     }
+
+    private static Faccion obtenerFaccionPorId(FaccionBBDD faccionBBDD, int idFaccion) {
+        List<Faccion> facciones = faccionBBDD.obtenerFacciones();
+
+        for (Faccion faccion : facciones) {
+            if (faccion.getIdFaccion() == idFaccion) {
+                return faccion;
+            }
+        }
+
+        return null;
+    }
+
+
 
     private static void actualizarOperador(Scanner scanner, OperadorBBDD operadorBBDD) {
         System.out.println("=== Actualizar Operador ===");

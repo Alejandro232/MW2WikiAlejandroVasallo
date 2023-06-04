@@ -12,9 +12,6 @@ public class menuRequisitosPcUsu {
     private static final String MENU_OPTIONS =
             "----- Menú de Requisitos de PC -----\n" +
                     "1. Mostrar requisitos de PC\n" +
-                    "2. Insertar requisito de PC\n" +
-                    "3. Eliminar requisito de PC\n" +
-                    "4. Actualizar requisito de PC\n" +
                     "5. Salir\n" +
                     "-----------------------------------\n" +
                     "Ingrese el número de opción: ";
@@ -38,15 +35,6 @@ public class menuRequisitosPcUsu {
                 switch (option) {
                     case 1:
                         mostrarRequisitosPc();
-                        break;
-                    case 2:
-                        insertarRequisitoPc();
-                        break;
-                    case 3:
-                        eliminarRequisitoPc();
-                        break;
-                    case 4:
-                        actualizarRequisitoPc();
                         break;
                     case 5:
                         exit = true;
@@ -86,99 +74,9 @@ public class menuRequisitosPcUsu {
         System.out.println();
     }
 
-    private void insertarRequisitoPc() {
-        System.out.println("----- Insertar Requisito de PC -----");
 
-        System.out.print("Ingrese el ID del requisito: ");
-        int idRequisito = scanner.nextInt();
-        scanner.nextLine();
 
-        System.out.print("Ingrese el sistema operativo: ");
-        String sistemaOperativo = scanner.nextLine();
-
-        System.out.print("Ingrese la memoria RAM: ");
-        String memoriaRam = scanner.nextLine();
-
-        System.out.print("Ingrese el procesador: ");
-        String procesador = scanner.nextLine();
-
-        System.out.print("Ingrese la tarjeta gráfica: ");
-        String tarjetaGrafica = scanner.nextLine();
-
-        System.out.print("Ingrese la memoria gráfica: ");
-        String memoriaGrafica = scanner.nextLine();
-
-        System.out.print("Ingrese el almacenamiento: ");
-        String almacenamiento = scanner.nextLine();
-
-        RequisitosPc requisitoPc = new RequisitosPc(idRequisito, sistemaOperativo, memoriaRam, procesador,
-                tarjetaGrafica, memoriaGrafica, almacenamiento);
-        requisitosPcBBDD.insertarRequisitoPc(requisitoPc);
-
-        System.out.println("Requisito de PC insertado correctamente.");
-        System.out.println();
-    }
-
-    private void eliminarRequisitoPc() {
-        System.out.println("----- Eliminar Requisito de PC -----");
-
-        System.out.print("Ingrese el ID del requisito a eliminar: ");
-        int idRequisito = scanner.nextInt();
-        scanner.nextLine();
-
-        requisitosPcBBDD.eliminarRequisitoPc(idRequisito);
-
-        System.out.println("Requisito de PC eliminado correctamente.");
-        System.out.println();
-    }
-
-    private void actualizarRequisitoPc() {
-        System.out.println("----- Actualizar Requisito de PC -----");
-
-        System.out.print("Ingrese el ID del requisito a actualizar: ");
-        int idRequisito = scanner.nextInt();
-        scanner.nextLine();
-
-        // Verificar si el requisito existe antes de proceder con la actualización
-        List<RequisitosPc> requisitosPc = requisitosPcBBDD.obtenerRequisitosPc();
-        boolean requisitoExiste = false;
-        for (RequisitosPc requisitoPc : requisitosPc) {
-            if (requisitoPc.getIdRequisito() == idRequisito) {
-                requisitoExiste = true;
-                break;
-            }
-        }
-
-        if (requisitoExiste) {
-            System.out.print("Ingrese el sistema operativo actualizado: ");
-            String sistemaOperativo = scanner.nextLine();
-
-            System.out.print("Ingrese la memoria RAM actualizada: ");
-            String memoriaRam = scanner.nextLine();
-
-            System.out.print("Ingrese el procesador actualizado: ");
-            String procesador = scanner.nextLine();
-
-            System.out.print("Ingrese la tarjeta gráfica actualizada: ");
-            String tarjetaGrafica = scanner.nextLine();
-
-            System.out.print("Ingrese la memoria gráfica actualizada: ");
-            String memoriaGrafica = scanner.nextLine();
-
-            System.out.print("Ingrese el almacenamiento actualizado: ");
-            String almacenamiento = scanner.nextLine();
-
-            RequisitosPc requisitoPc = new RequisitosPc(idRequisito, sistemaOperativo, memoriaRam, procesador,
-                    tarjetaGrafica, memoriaGrafica, almacenamiento);
-            requisitosPcBBDD.actualizarRequisitoPc(requisitoPc);
-
-            System.out.println("Requisito de PC actualizado correctamente.");
-        } else {
-            System.out.println("El requisito con ID " + idRequisito + " no existe.");
-        }
-
-        System.out.println();
-    }
+ 
 
     public static void main(String[] args) {
         menuRequisitosPcUsu menu = new menuRequisitosPcUsu();
