@@ -63,7 +63,6 @@ public class MENUUSUCOMPLETO {
             System.out.println();
         }
 
-        scanner.close();
     }
 
     private static void mostrarMenu() {

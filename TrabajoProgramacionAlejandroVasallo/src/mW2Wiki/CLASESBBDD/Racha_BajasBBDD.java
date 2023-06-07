@@ -34,7 +34,7 @@ public class Racha_BajasBBDD {
 
     public void insertarRachaBajas(Racha_Bajas rachaBajas) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO Rachas_Bajas (id_Racha_Baja, nombre, descripcion, puntos_Necesarios) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO Rachas_Bajas (id_Rachas_Bajas, nombre, descripcion, puntos_Necesarios) VALUES (?, ?, ?, ?)")) {
 
             statement.setInt(1, rachaBajas.getIdRachaBajas());
             statement.setString(2, rachaBajas.getNombre());
@@ -50,7 +50,7 @@ public class Racha_BajasBBDD {
 
     public void eliminarRachaBajas(int idRachaBajas) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM Rachas_Bajas WHERE id_Racha_Baja = ?")) {
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM Rachas_Bajas WHERE id_Rachas_Bajas = ?")) {
 
             statement.setInt(1, idRachaBajas);
 
@@ -85,7 +85,7 @@ public class Racha_BajasBBDD {
              ResultSet resultSet = statement.executeQuery("SELECT * FROM Rachas_Bajas")) {
 
             while (resultSet.next()) {
-                int idRachaBajas = resultSet.getInt("id_Racha_Baja");
+                int idRachaBajas = resultSet.getInt("id_Rachas_Bajas");
                 String nombre = resultSet.getString("nombre");
                 String descripcion = resultSet.getString("descripcion");
                 int puntosNecesarios = resultSet.getInt("puntos_Necesarios");

@@ -72,7 +72,7 @@ public class MENUADMINCOMPLETO {
             System.out.println("Contraseña incorrecta. No tiene acceso al programa gestor de la BBDD MW2WIKI.");
         }
 
-        scanner.close();
+       // scanner.close();
     }
 
     private static void mostrarMenu() {
