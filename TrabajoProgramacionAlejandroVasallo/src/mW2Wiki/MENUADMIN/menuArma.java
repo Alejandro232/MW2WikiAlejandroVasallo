@@ -76,37 +76,141 @@ public class menuArma {
 
     private static void agregarArma() {
         System.out.println("Ingrese los datos del arma:");
-        System.out.print("ID Clase Arma: ");
-        int idClaseArma = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Descripción: ");
-        String descripcion = scanner.nextLine();
-        System.out.print("Requisito de desbloqueo: ");
-        String requisitoDesbloqueo = scanner.nextLine();
-        System.out.print("Daño: ");
-        int daño = scanner.nextInt();
-        System.out.print("Precisión: ");
-        int precision = scanner.nextInt();
-        System.out.print("Retroceso: ");
-        int retroceso = scanner.nextInt();
-        System.out.print("Manejo: ");
-        int manejo = scanner.nextInt();
-        System.out.print("Movilidad: ");
-        int movilidad = scanner.nextInt();
-        System.out.print("Cadencia: ");
-        int cadencia = scanner.nextInt();
-        System.out.print("Alcance: ");
-        int alcance = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
 
-        Arma nuevaArma = new Arma( idClaseArma, nombre, descripcion, requisitoDesbloqueo, daño, precision,
+        int idClaseArma;
+        while (true) {
+            try {
+                System.out.print("ID Clase Arma: ");
+                idClaseArma = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para el ID Clase Arma.");
+            }
+        }
+
+        String nombre;
+        while (true) {
+            System.out.print("Nombre: ");
+            nombre = scanner.nextLine();
+            if (!nombre.isEmpty() && esTexto(nombre)) {
+                break;
+            } else {
+                System.out.println("Error: el nombre no puede estar vacío y debe contener solo texto.");
+            }
+        }
+
+        String descripcion;
+        while (true) {
+            System.out.print("Descripción: ");
+            descripcion = scanner.nextLine();
+            if (!descripcion.isEmpty() && esTexto(descripcion)) {
+                break;
+            } else {
+                System.out.println("Error: la descripción no puede estar vacía y debe contener solo texto.");
+            }
+        }
+
+        String requisitoDesbloqueo;
+        while (true) {
+            System.out.print("Requisito de desbloqueo: ");
+            requisitoDesbloqueo = scanner.nextLine();
+            if (!requisitoDesbloqueo.isEmpty() && esTexto(requisitoDesbloqueo)) {
+                break;
+            } else {
+                System.out.println("Error: el requisito de desbloqueo no puede estar vacío y debe contener solo texto.");
+            }
+        }
+
+        int daño;
+        while (true) {
+            try {
+                System.out.print("Daño: ");
+                daño = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para el Daño.");
+            }
+        }
+
+        int precision;
+        while (true) {
+            try {
+                System.out.print("Precisión: ");
+                precision = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para la Precisión.");
+            }
+        }
+
+        int retroceso;
+        while (true) {
+            try {
+                System.out.print("Retroceso: ");
+                retroceso = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para el Retroceso.");
+            }
+        }
+
+        int manejo;
+        while (true) {
+            try {
+                System.out.print("Manejo: ");
+                manejo = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para el Manejo.");
+            }
+        }
+
+        int movilidad;
+        while (true) {
+            try {
+                System.out.print("Movilidad: ");
+                movilidad = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para la Movilidad.");
+            }
+        }
+
+        int cadencia;
+        while (true) {
+            try {
+                System.out.print("Cadencia: ");
+                cadencia = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para la Cadencia.");
+            }
+        }
+
+        int alcance;
+        while (true) {
+            try {
+                System.out.print("Alcance: ");
+                alcance = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: debe ingresar un número entero para el Alcance.");
+            }
+        }
+
+        Arma nuevaArma = new Arma(idClaseArma, nombre, descripcion, requisitoDesbloqueo, daño, precision,
                 retroceso, manejo, movilidad, cadencia, alcance);
 
         armaBBDD.insertarArma(nuevaArma);
         System.out.println("El arma se ha agregado correctamente a la base de datos.");
     }
+
+    private static boolean esTexto(String texto) {
+        return texto.matches("[a-zA-Z]+");
+    }
+
+
+
 
     private static void eliminarArma() {
         System.out.print("Ingrese el ID del arma que desea eliminar: ");

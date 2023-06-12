@@ -3,8 +3,9 @@ package mW2Wiki;
 import java.util.Scanner;
 import mW2Wiki.MENUADMIN.MENUADMINCOMPLETO;
 import mW2Wiki.MENUUSU.MENUUSUCOMPLETO;
+import mW2Wiki.PARTIDAPERSONALIZADA.MenuPartidaPersonalizada;
 
-public class MENUPRINCIPALMW2WIKI {
+public class MENUFUSIONADO {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +28,7 @@ public class MENUPRINCIPALMW2WIKI {
                         MENUUSUCOMPLETO.main(args);
                         break;
                     case 3:
-                        MenuPartidaPersonalizada.main(args);;
+                        MenuPartidaPersonalizada.main(args);
                         break;
                     case 4:
                         salir = true;

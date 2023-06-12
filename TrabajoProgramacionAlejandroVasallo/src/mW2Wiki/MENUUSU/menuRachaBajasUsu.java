@@ -43,9 +43,12 @@ public class menuRachaBajasUsu {
         List<Racha_Bajas> rachasBajas = rachaBajasBBDD.obtenerRachasBajas();
         System.out.println("----- Todas las Rachas Bajas -----");
         for (Racha_Bajas rachaBajas : rachasBajas) {
-            System.out.println(rachaBajas);
+            System.out.println("ID: " + rachaBajas.getIdRachaBajas());
+            System.out.println("Nombre: " + rachaBajas.getNombre());
+            System.out.println("Descripción: " + rachaBajas.getDescripcion());
+            System.out.println("Puntos Necesarios: " + rachaBajas.getPuntosNecesarios());
+            System.out.println("---------------------------------");
         }
-        System.out.println("---------------------------------");
     }
 
     public static void main(String[] args) {

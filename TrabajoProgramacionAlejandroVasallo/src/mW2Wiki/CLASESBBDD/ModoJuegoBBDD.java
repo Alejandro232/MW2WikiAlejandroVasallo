@@ -48,7 +48,7 @@ public class ModoJuegoBBDD {
 
     public void eliminarModoJuego(int idModoJuego) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM Modo_Juego WHERE id_Modo = ?")) {
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM Modo_Juego WHERE id_Modo_Juego = ?")) {
 
             statement.setInt(1, idModoJuego);
 
@@ -61,7 +61,7 @@ public class ModoJuegoBBDD {
 
     public void actualizarModoJuego(ModoJuego modoJuego) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("UPDATE Modo_Juego SET nombre = ?, descripcion = ? WHERE id_Modo = ?")) {
+             PreparedStatement statement = connection.prepareStatement("UPDATE Modo_Juego SET nombre = ?, descripcion = ? WHERE id_Modo_Juego = ?")) {
 
             statement.setString(1, modoJuego.getNombre());
             statement.setString(2, modoJuego.getDescripcion());
@@ -82,7 +82,7 @@ public class ModoJuegoBBDD {
              ResultSet resultSet = statement.executeQuery("SELECT * FROM Modo_Juego")) {
 
             while (resultSet.next()) {
-                int idModo = resultSet.getInt("id_Modo");
+                int idModo = resultSet.getInt("id_Modo_Juego");
                 String nombre = resultSet.getString("nombre");
                 String descripcion = resultSet.getString("descripcion");
 
@@ -101,13 +101,13 @@ public class ModoJuegoBBDD {
     ModoJuego modoJuego = null;
 
     try (Connection connection = DriverManager.getConnection(url, usu, pas);
-         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Modo_Juego WHERE id_Modo = ?")) {
+         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Modo_Juego WHERE id_Modo_Juego = ?")) {
 
         statement.setInt(1, idModoJuego);
 
         try (ResultSet resultSet = statement.executeQuery()) {
             if (resultSet.next()) {
-                int idModo = resultSet.getInt("id_Modo");
+                int idModo = resultSet.getInt("id_Modo_Juego");
                 String nombre = resultSet.getString("nombre");
                 String descripcion = resultSet.getString("descripcion");
 

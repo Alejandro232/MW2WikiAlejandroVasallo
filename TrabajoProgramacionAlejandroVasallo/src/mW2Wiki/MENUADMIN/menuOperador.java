@@ -52,20 +52,13 @@ public class menuOperador {
 
     private static void crearOperador(Scanner scanner, OperadorBBDD operadorBBDD) {
         System.out.println("=== Crear Operador ===");
-        System.out.print("Ingrese el ID del Operador: ");
-        int idOperador = scanner.nextInt();
-        scanner.nextLine(); // Consumir nueva línea
+        int idOperador = obtenerEntero(scanner, "Ingrese el ID del Operador: ");
 
-        System.out.print("Ingrese el ID de la Facción: ");
-        int idFaccion = scanner.nextInt();
-        scanner.nextLine(); // Consumir nueva línea
+        FaccionBBDD faccionBBDD = new FaccionBBDD("root", "alejandro2002", "3307", "localhost", "mw2wiki");
+        int idFaccion = obtenerEntero(scanner, "Ingrese el ID de la Facción: ");
 
-        System.out.print("Ingrese el género: ");
-        String genero = scanner.nextLine();
-
-        System.out.print("Ingrese la altura: ");
-        float altura = scanner.nextFloat();
-        scanner.nextLine(); // Consumir nueva línea
+        String genero = obtenerCadenaNoNumerica(scanner, "Ingrese el género: ");
+        float altura = obtenerFloat(scanner, "Ingrese la altura: ");
 
         Operador operador = new Operador(idOperador, idFaccion, genero, altura);
         operadorBBDD.insertarOperador(operador);
@@ -73,6 +66,51 @@ public class menuOperador {
         System.out.println("Operador creado exitosamente");
         System.out.println();
     }
+
+    private static int obtenerEntero(Scanner scanner, String mensaje) {
+        int entero;
+        while (true) {
+            System.out.print(mensaje);
+            String entrada = scanner.nextLine();
+            if (entrada.matches("\\d+")) {
+                entero = Integer.parseInt(entrada);
+                break;
+            } else {
+                System.out.println("Error: la entrada debe ser un número entero.");
+            }
+        }
+        return entero;
+    }
+
+    private static String obtenerCadenaNoNumerica(Scanner scanner, String mensaje) {
+        String cadena;
+        while (true) {
+            System.out.print(mensaje);
+            cadena = scanner.nextLine();
+            if (cadena.matches(".*\\d.*")) {
+                System.out.println("Error: la entrada no puede contener números. Por favor, ingrese una cadena de texto.");
+            } else {
+                break;
+            }
+        }
+        return cadena;
+    }
+
+    private static float obtenerFloat(Scanner scanner, String mensaje) {
+        float flotante;
+        while (true) {
+            System.out.print(mensaje);
+            String entrada = scanner.nextLine();
+            try {
+                flotante = Float.parseFloat(entrada);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: la entrada debe ser un número decimal válido.");
+            }
+        }
+        return flotante;
+    }
+
 
     private static void mostrarOperadores(OperadorBBDD operadorBBDD, FaccionBBDD faccionBBDD) {
         System.out.println("=== Mostrar Operadores ===");

@@ -63,7 +63,7 @@ public class Racha_BajasBBDD {
 
     public void actualizarRachaBajas(Racha_Bajas rachaBajas) {
         try (Connection connection = DriverManager.getConnection(url, usu, pas);
-             PreparedStatement statement = connection.prepareStatement("UPDATE Rachas_Bajas SET nombre = ?, descripcion = ?, puntos_Necesarios = ? WHERE id_Racha_Baja = ?")) {
+             PreparedStatement statement = connection.prepareStatement("UPDATE Rachas_Bajas SET nombre = ?, descripcion = ?, puntos_Necesarios = ? WHERE id_Rachas_Bajas = ?")) {
 
             statement.setString(1, rachaBajas.getNombre());
             statement.setString(2, rachaBajas.getDescripcion());

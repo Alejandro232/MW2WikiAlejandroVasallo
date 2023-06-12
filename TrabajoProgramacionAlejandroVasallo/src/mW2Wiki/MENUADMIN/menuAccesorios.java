@@ -67,16 +67,23 @@ public class menuAccesorios {
         }
     }
 
-
-
-
-
     private static void agregarAccesorio() {
         System.out.println("Ingrese los datos del nuevo accesorio:");
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
+        while (!esString(nombre)) {
+            System.out.println("El nombre debe ser una cadena de caracteres. Intente nuevamente.");
+            System.out.print("Nombre: ");
+            nombre = scanner.nextLine();
+        }
+
         System.out.print("Descripción: ");
         String descripcion = scanner.nextLine();
+        while (!esString(descripcion)) {
+            System.out.println("La descripción debe ser una cadena de caracteres. Intente nuevamente.");
+            System.out.print("Descripción: ");
+            descripcion = scanner.nextLine();
+        }
 
         // Crear el nuevo objeto Accesorio
         Accesorio nuevoAccesorio = new Accesorio(0, nombre, descripcion);
@@ -110,6 +117,7 @@ public class menuAccesorios {
             System.out.println("Error al guardar el accesorio en la base de datos.");
         }
     }
+
     private static void eliminarAccesorio() {
         System.out.println("Ingrese el ID del accesorio a eliminar:");
         int id = scanner.nextInt();
@@ -154,5 +162,9 @@ public class menuAccesorios {
         } else {
             System.out.println("No se encontró ningún accesorio con el ID especificado.");
         }
+    }
+
+    private static boolean esString(String str) {
+        return str != null && !str.isEmpty() && str.chars().allMatch(Character::isLetter);
     }
 }

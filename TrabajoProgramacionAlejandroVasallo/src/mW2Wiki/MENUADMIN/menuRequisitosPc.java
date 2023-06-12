@@ -76,7 +76,7 @@ public class menuRequisitosPc {
             System.out.println("ID\tSistema Operativo\tMemoria RAM\tProcesador\tTarjeta Gráfica\tMemoria Gráfica\tAlmacenamiento");
             System.out.println("---------------------------------------------------------------------------------------------------");
             for (RequisitosPc requisitoPc : requisitosPc) {
-                System.out.printf("%d\t%-20s\t%-10s\t%-10s\t%-16s\t%-16s\t%s\n",
+                System.out.printf("%d\t%-20s\t%-10s\t%-15s\t%-30s\t%-15s\t%s\n",
                         requisitoPc.getIdRequisito(), requisitoPc.getSistemaOperativo(), requisitoPc.getMemoriaRam(),
                         requisitoPc.getProcesador(), requisitoPc.getTarjetaGrafica(), requisitoPc.getMemoriaGrafica(),
                         requisitoPc.getAlmacenamiento());
@@ -85,6 +85,7 @@ public class menuRequisitosPc {
 
         System.out.println();
     }
+
 
     private void insertarRequisitoPc() {
         System.out.println("----- Insertar Requisito de PC -----");

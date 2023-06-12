@@ -1,5 +1,6 @@
 package mW2Wiki.MENUADMIN;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,16 +59,54 @@ public class menuCamuflaje {
 
     private static void insertarCamuflaje() {
         System.out.println("----- Insertar Camuflaje -----");
-        System.out.print("Ingrese el ID del camuflaje: ");
-        int idCamuflaje = scanner.nextInt();
-        scanner.nextLine(); // Consumir nueva línea pendiente
-        System.out.print("Ingrese el nombre del camuflaje: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Ingrese el requisito de desbloqueo del camuflaje: ");
-        String requisitoDesbloqueo = scanner.nextLine();
 
-        System.out.print("Ingrese el ID del arma asociado al camuflaje: ");
-        int idArma = scanner.nextInt();
+        int idCamuflaje;
+        while (true) {
+            try {
+                System.out.print("Ingrese el ID del camuflaje: ");
+                idCamuflaje = scanner.nextInt();
+                scanner.nextLine(); // Consumir nueva línea pendiente
+                break;
+            } catch (InputMismatchException e) {
+                scanner.nextLine(); // Limpiar el buffer de entrada
+                System.out.println("Error: debe ingresar un número entero para el ID del camuflaje.");
+            }
+        }
+
+        String nombre;
+        while (true) {
+            System.out.print("Ingrese el nombre del camuflaje: ");
+            nombre = scanner.nextLine();
+            if (!nombre.matches("[0-9]+")) {
+                break;
+            } else {
+                System.out.println("Error: el nombre del camuflaje no puede ser un número.");
+            }
+        }
+
+        String requisitoDesbloqueo;
+        while (true) {
+            System.out.print("Ingrese el requisito de desbloqueo del camuflaje: ");
+            requisitoDesbloqueo = scanner.nextLine();
+            if (!requisitoDesbloqueo.matches("[0-9]+")) {
+                break;
+            } else {
+                System.out.println("Error: el requisito de desbloqueo no puede ser un número.");
+            }
+        }
+
+        int idArma;
+        while (true) {
+            try {
+                System.out.print("Ingrese el ID del arma asociado al camuflaje: ");
+                idArma = scanner.nextInt();
+                scanner.nextLine(); // Consumir nueva línea pendiente
+                break;
+            } catch (InputMismatchException e) {
+                scanner.nextLine(); // Limpiar el buffer de entrada
+                System.out.println("Error: debe ingresar un número entero para el ID del arma.");
+            }
+        }
 
         Camuflaje camuflaje = new Camuflaje(idCamuflaje, nombre, requisitoDesbloqueo, idArma);
         camuflajeBBDD.insertarCamuflaje(camuflaje);
@@ -75,6 +114,10 @@ public class menuCamuflaje {
         System.out.println("El camuflaje se ha insertado correctamente.");
         System.out.println();
     }
+
+
+
+
 
     private static void eliminarCamuflaje() {
         System.out.println("----- Eliminar Camuflaje -----");

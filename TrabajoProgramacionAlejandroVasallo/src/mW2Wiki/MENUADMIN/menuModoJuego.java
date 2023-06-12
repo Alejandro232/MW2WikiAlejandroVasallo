@@ -80,17 +80,30 @@ public class menuModoJuego {
     private void agregarModoJuego(Scanner scanner) {
         System.out.println("---- AGREGAR MODO DE JUEGO ----");
 
-        System.out.print("Ingrese el nombre del modo de juego: ");
-        String nombre = scanner.nextLine();
-
-        System.out.print("Ingrese la descripción del modo de juego: ");
-        String descripcion = scanner.nextLine();
+        String nombre = leerCadenaNoNumerica("Ingrese el nombre del modo de juego: ");
+        String descripcion = leerCadenaNoNumerica("Ingrese la descripción del modo de juego: ");
 
         ModoJuego modoJuego = new ModoJuego(nombre, descripcion);
         modoJuegoBBDD.insertarModoJuego(modoJuego);
 
         System.out.println("Modo de juego agregado exitosamente.");
     }
+
+    private String leerCadenaNoNumerica(String mensaje) {
+        String entrada;
+        while (true) {
+            System.out.print(mensaje);
+            Scanner scanner = new Scanner(System.in);
+			entrada = scanner.next();
+            if (entrada.matches(".*\\d.*")) {
+                System.out.println("Error: la entrada no puede contener números. Por favor, ingrese una cadena de texto.");
+            } else {
+                break;
+            }
+        }
+        return entrada;
+    }
+
 
     private void actualizarModoJuego(Scanner scanner) {
         System.out.println("---- ACTUALIZAR MODO DE JUEGO ----");

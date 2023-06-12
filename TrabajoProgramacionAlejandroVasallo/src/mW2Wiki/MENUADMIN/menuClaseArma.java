@@ -78,14 +78,29 @@ public class menuClaseArma {
     private static void agregarClaseArma() {
         System.out.println("=== Agregar Clase de Arma ===");
         int idClaseArma = leerEntero("Ingrese el ID de la Clase de Arma: ");
-        String nombre = leerCadena("Ingrese el nombre de la Clase de Arma: ");
-        String descripcion = leerCadena("Ingrese la descripción de la Clase de Arma: ");
+        String nombre = leerCadenaNoNumerica("Ingrese el nombre de la Clase de Arma: ");
+        String descripcion = leerCadenaNoNumerica("Ingrese la descripción de la Clase de Arma: ");
 
         ClaseArma nuevaClaseArma = new ClaseArma(idClaseArma, nombre, descripcion);
         claseArmaBBDD.insertarClaseArma(nuevaClaseArma);
 
         System.out.println("La Clase de Arma ha sido agregada correctamente.");
     }
+
+    private static String leerCadenaNoNumerica(String mensaje) {
+        String entrada;
+        while (true) {
+            System.out.print(mensaje);
+            entrada = scanner.next();
+            if (!entrada.matches(".*\\d.*")) {
+                break;
+            } else {
+                System.out.println("Error: la entrada no puede contener números. Por favor, ingrese una cadena de texto.");
+            }
+        }
+        return entrada;
+    }
+
 
     private static void actualizarClaseArma() {
         System.out.println("=== Actualizar Clase de Arma ===");

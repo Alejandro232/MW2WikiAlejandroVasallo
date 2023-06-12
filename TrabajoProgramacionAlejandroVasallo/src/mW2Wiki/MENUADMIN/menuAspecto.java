@@ -66,15 +66,40 @@ public class menuAspecto {
     private void insertarAspecto() {
         System.out.println("----- Insertar Aspecto -----");
 
-        System.out.print("ID del aspecto: ");
-        int idAspecto = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea pendiente
+        int idAspecto;
+        while (true) {
+            try {
+                System.out.print("ID del aspecto: ");
+                idAspecto = scanner.nextInt();
+                scanner.nextLine(); // Consumir el salto de línea pendiente
+                break;
+            } catch (InputMismatchException e) {
+                scanner.nextLine(); // Limpiar el buffer de entrada
+                System.out.println("Error: debe ingresar un número entero para el ID del aspecto.");
+            }
+        }
 
-        System.out.print("Nombre del aspecto: ");
-        String nombre = scanner.nextLine();
+        String nombre;
+        while (true) {
+            System.out.print("Nombre del aspecto: ");
+            nombre = scanner.nextLine();
+            if (!nombre.isEmpty()) {
+                break;
+            } else {
+                System.out.println("Error: el nombre del aspecto no puede estar vacío.");
+            }
+        }
 
-        System.out.print("Requisito de desbloqueo: ");
-        String requisitoDesbloqueo = scanner.nextLine();
+        String requisitoDesbloqueo;
+        while (true) {
+            System.out.print("Requisito de desbloqueo: ");
+            requisitoDesbloqueo = scanner.nextLine();
+            if (!requisitoDesbloqueo.isEmpty()) {
+                break;
+            } else {
+                System.out.println("Error: el requisito de desbloqueo no puede estar vacío.");
+            }
+        }
 
         Aspecto aspecto = new Aspecto(idAspecto, nombre, requisitoDesbloqueo, null);
         aspectoBBDD.insertarAspecto(aspecto);

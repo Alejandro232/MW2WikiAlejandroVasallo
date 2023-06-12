@@ -70,7 +70,7 @@ public class Accesorio {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion= descripcion;
     }
 
     @Override

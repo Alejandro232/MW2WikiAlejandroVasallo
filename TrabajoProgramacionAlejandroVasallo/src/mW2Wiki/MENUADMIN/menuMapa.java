@@ -70,15 +70,28 @@ public class menuMapa {
 
     private void agregarMapa() {
         System.out.println("===== AGREGAR MAPA =====");
-        System.out.print("Ingrese el nombre del mapa: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Ingrese la descripción del mapa: ");
-        String descripcion = scanner.nextLine();
+        String nombre = leerCadenaNoNumerica("Ingrese el nombre del mapa: ");
+        String descripcion = leerCadenaNoNumerica("Ingrese la descripción del mapa: ");
 
         Mapa nuevoMapa = new Mapa(nombre, descripcion);
         mapaBBDD.insertarMapa(nuevoMapa);
         System.out.println("El mapa se agregó correctamente.");
     }
+
+    private String leerCadenaNoNumerica(String mensaje) {
+        String entrada;
+        while (true) {
+            System.out.print(mensaje);
+            entrada = scanner.nextLine();
+            if (entrada.matches(".*\\d.*")) {
+                System.out.println("Error: la entrada no puede contener números. Por favor, ingrese una cadena de texto.");
+            } else {
+                break;
+            }
+        }
+        return entrada;
+    }
+
 
     private void actualizarMapa() {
         System.out.println("===== ACTUALIZAR MAPA =====");

@@ -55,24 +55,65 @@ public class menuRachaBajas {
         List<Racha_Bajas> rachasBajas = rachaBajasBBDD.obtenerRachasBajas();
         System.out.println("----- Todas las Rachas Bajas -----");
         for (Racha_Bajas rachaBajas : rachasBajas) {
-            System.out.println(rachaBajas);
+            System.out.println("ID: " + rachaBajas.getIdRachaBajas());
+            System.out.println("Nombre: " + rachaBajas.getNombre());
+            System.out.println("Descripción: " + rachaBajas.getDescripcion());
+            System.out.println("Puntos Necesarios: " + rachaBajas.getPuntosNecesarios());
+            System.out.println("---------------------------------");
         }
-        System.out.println("---------------------------------");
     }
+
 
     private void insertarRachaBaja() {
         System.out.println("----- Insertar Nueva Racha Baja -----");
-        System.out.print("Ingrese el nombre de la racha baja: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Ingrese la descripción de la racha baja: ");
-        String descripcion = scanner.nextLine();
-        System.out.print("Ingrese los puntos necesarios de la racha baja: ");
-        int puntosNecesarios = scanner.nextInt();
+
+        // Ingresar el nombre de la racha baja (solo se permiten letras y espacios)
+        String nombre;
+        boolean nombreValido = false;
+        do {
+            System.out.print("Ingrese el nombre de la racha baja: ");
+            nombre = scanner.next();
+            if (nombre.matches("[a-zA-Z\\s]+")) {
+                nombreValido = true;
+            } else {
+                System.out.println("Error: El nombre solo puede contener letras y espacios.");
+            }
+        } while (!nombreValido);
+
+        // Ingresar la descripción de la racha baja (solo se permiten letras y espacios)
+        String descripcion;
+        boolean descripcionValida = false;
+        do {
+            System.out.print("Ingrese la descripción de la racha baja: ");
+            descripcion = scanner.next();
+            if (descripcion.matches("[a-zA-Z\\s]+")) {
+                descripcionValida = true;
+            } else {
+                System.out.println("Error: La descripción solo puede contener letras y espacios.");
+            }
+        } while (!descripcionValida);
+
+        // Ingresar los puntos necesarios de la racha baja (solo se permiten números)
+        int puntosNecesarios = 0; // Inicializar con un valor predeterminado
+        boolean puntosValidos = false;
+        do {
+            System.out.print("Ingrese los puntos necesarios de la racha baja: ");
+            if (scanner.hasNextInt()) {
+                puntosNecesarios = scanner.nextInt();
+                scanner.nextLine(); // Limpiar el buffer del Scanner
+                puntosValidos = true;
+            } else {
+                System.out.println("Error: Los puntos necesarios deben ser un número válido.");
+                scanner.nextLine(); // Limpiar el buffer del Scanner
+            }
+        } while (!puntosValidos);
 
         Racha_Bajas rachaBajas = new Racha_Bajas(nombre, descripcion, puntosNecesarios);
         rachaBajasBBDD.insertarRachaBajas(rachaBajas);
         System.out.println("Racha baja insertada correctamente.");
     }
+
+
 
     private void actualizarRachaBaja() {
         System.out.println("----- Actualizar Racha Baja -----");

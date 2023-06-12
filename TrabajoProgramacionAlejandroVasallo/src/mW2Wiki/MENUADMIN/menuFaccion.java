@@ -3,6 +3,7 @@ package mW2Wiki.MENUADMIN;
 import mW2Wiki.CLASES.Faccion;
 import mW2Wiki.CLASESBBDD.FaccionBBDD;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -73,18 +74,41 @@ public class menuFaccion {
 
     private void agregarFaccion() {
         System.out.println("===== AGREGAR FACCIÓN =====");
-        System.out.print("Ingrese el ID de la facción: ");
-        int idFaccion = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea después de leer el número
-        System.out.print("Ingrese el nombre de la facción: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Ingrese la descripción de la facción: ");
-        String descripcion = scanner.nextLine();
+        int idFaccion = leerEntero("Ingrese el ID de la facción: ");
+        String nombre = leerCadenaNoNumerica("Ingrese el nombre de la facción: ");
+        String descripcion = leerCadenaNoNumerica("Ingrese la descripción de la facción: ");
 
         Faccion nuevaFaccion = new Faccion(idFaccion, nombre, descripcion);
         faccionBBDD.insertarFaccion(nuevaFaccion);
         System.out.println("La facción se agregó correctamente.");
     }
+
+    private int leerEntero(String mensaje) {
+        while (true) {
+            try {
+                System.out.print(mensaje);
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error: entrada inválida. Por favor, ingrese un número entero.");
+                scanner.nextLine(); // Consumir la entrada inválida
+            }
+        }
+    }
+
+    private String leerCadenaNoNumerica(String mensaje) {
+        String entrada;
+        while (true) {
+            System.out.print(mensaje);
+            entrada = scanner.next();
+            if (!entrada.matches(".*\\d.*")) {
+                break;
+            } else {
+                System.out.println("Error: la entrada no puede contener números. Por favor, ingrese una cadena de texto.");
+            }
+        }
+        return entrada;
+    }
+
 
     private void actualizarFaccion() {
         System.out.println("===== ACTUALIZAR FACCIÓN =====");

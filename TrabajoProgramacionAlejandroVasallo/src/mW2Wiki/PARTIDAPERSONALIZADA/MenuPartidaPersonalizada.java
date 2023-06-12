@@ -1,4 +1,4 @@
-package mW2Wiki;
+package mW2Wiki.PARTIDAPERSONALIZADA;
 import java.sql.*;
 import java.util.Scanner;
 

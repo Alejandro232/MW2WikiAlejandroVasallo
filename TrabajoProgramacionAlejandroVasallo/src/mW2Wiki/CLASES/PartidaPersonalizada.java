@@ -1,4 +1,4 @@
-package mW2Wiki;
+package mW2Wiki.CLASES;
 
 public class PartidaPersonalizada {
 
