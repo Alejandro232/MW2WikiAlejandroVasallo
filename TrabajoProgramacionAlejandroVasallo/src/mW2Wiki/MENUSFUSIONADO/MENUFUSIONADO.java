@@ -1,9 +1,10 @@
-package mW2Wiki;
+package mW2Wiki.MENUSFUSIONADO;
 
 import java.util.Scanner;
 import mW2Wiki.MENUADMIN.MENUADMINCOMPLETO;
 import mW2Wiki.MENUUSU.MENUUSUCOMPLETO;
 import mW2Wiki.PARTIDAPERSONALIZADA.MenuPartidaPersonalizada;
+import mW2Wiki.PARTIDAPERSONALIZADA.MostrarPartidasPersonalizadas;
 
 public class MENUFUSIONADO {
 
@@ -31,6 +32,9 @@ public class MENUFUSIONADO {
                         MenuPartidaPersonalizada.main(args);
                         break;
                     case 4:
+                        MostrarPartidasPersonalizadas.main(args);
+                        break;
+                    case 5:
                         salir = true;
                         System.out.println("Salió del Programa MW2Wiki");
                         break;
@@ -52,7 +56,8 @@ public class MENUFUSIONADO {
         System.out.println("=== Menú Principal ===");
         System.out.println("1. Menú Administrador");
         System.out.println("2. Menú Usuario");
-        System.out.println("3.Crear Partida Personalizada");
-        System.out.println("4. Salir");
+        System.out.println("3. Crear Partida Personalizada");
+        System.out.println("4. Mostrar Partidas Personalizadas");
+        System.out.println("5. Salir");
     }
 }

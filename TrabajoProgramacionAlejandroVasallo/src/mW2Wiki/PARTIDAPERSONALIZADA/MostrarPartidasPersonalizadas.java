@@ -16,9 +16,9 @@ public class MostrarPartidasPersonalizadas {
                            "FROM PartidaPersonalizada PP " +
                            "JOIN Operador O ON PP.id_Operador = O.id_Operador " +
                            "JOIN Arma A ON PP.id_Arma = A.id_Arma " +
-                           "JOIN Modo_Juego MJ ON PP.id_Modo = MJ.id_Modo " +
+                           "JOIN Modo_Juego MJ ON PP.id_Modo = MJ.id_Modo_Juego " +
                            "JOIN Mapa M ON PP.id_Mapa = M.id_Mapa " +
-                           "JOIN Rachas_Bajas RB ON PP.id_Rachas_Bajas = RB.id_Racha_Baja";
+                           "JOIN Rachas_Bajas RB ON PP.id_Rachas_Bajas = RB.id_Rachas_Bajas";
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
